@@ -987,7 +987,7 @@ div[data-dimension] {
 /*--------------------*/
 
 #testimonial{
-  background: none repeat scroll 0 0 #f8f8f8;
+  background: none repeat scroll 0 0 #fff;
   display: inline;
   float: left;
   padding: 80px 0;
@@ -1260,7 +1260,7 @@ textarea .form-control {
   color: #ffffff;
 }
 .single_contact_feaured>p{
-  color: #888888;
+  color: #ffffff;
 }
 .success {
   border: 1px solid #008000;
@@ -1276,9 +1276,10 @@ textarea .form-control {
 }
 
 #contactFeature{
-  background-image: url("../../assets/images/contact-feature-bg.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  /*background-image: url("../../assets/images/contact-feature-bg.jpg");*/
+  /*background-repeat: no-repeat;*/
+  /*background-size: 100% 100%;*/
+  background: linear-gradient(rgb(0, 0, 0), rgb(3, 243, 255));
   position: relative;
   float: left;
   display: block;
