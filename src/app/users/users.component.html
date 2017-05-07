@@ -82,66 +82,72 @@
       </section>
       <br><br>
       <div class="col-md-12">
-        <form class="form-horizontal" role="form">
+        <form [formGroup]="registerForm">
           <div class="form-group">
-            <label for="name" class="col-sm-2 col-sm-offset-2 control-label">
-              Name</label>
+            <label class="col-sm-2 col-sm-offset-2 control-label">
+              Name
+            </label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" id="name" required>
+              <input type="text" class="form-control" formControlName="first_name">
             </div>
           </div>
           <div class="form-group">
-            <label for="lastname" class="col-sm-2 col-sm-offset-2 control-label">
-              Lastname</label>
+            <label class="col-sm-2 col-sm-offset-2 control-label">
+              Last name
+            </label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" id="lastname" required>
+              <input type="text" class="form-control" formControlName="last_name">
             </div>
           </div>
           <div class="form-group">
-            <label for="iddoc" class="col-sm-2 col-sm-offset-2 control-label">
-              ID Document</label>
+            <label class="col-sm-2 col-sm-offset-2 control-label">
+              ID Document
+            </label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" id="iddoc" required>
+              <input type="text" class="form-control" formControlName="doc_id">
             </div>
           </div>
           <div class="form-group">
-            <label for="email" class="col-sm-2 col-sm-offset-2 control-label">
-              Email</label>
+            <label class="col-sm-2 col-sm-offset-2 control-label">
+              Email
+            </label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" id="email" required>
+              <input type="text" class="form-control" formControlName="email">
             </div>
           </div>
           <div class="form-group">
-            <label for="phone" class="col-sm-2 col-sm-offset-2 control-label">
-              Phone</label>
+            <label class="col-sm-2 col-sm-offset-2 control-label">
+              Phone
+            </label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" id="phone" required>
+              <input type="text" class="form-control" formControlName="phone">
             </div>
           </div>
           <div class="form-group">
-            <label for="address" class="col-sm-2 col-sm-offset-2 control-label">
-              Address</label>
+            <label class="col-sm-2 col-sm-offset-2 control-label">
+              Address
+            </label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" id="address" required>
+              <input type="text" class="form-control" formControlName="address">
             </div>
           </div>
-          <div class="form-group">
-            <label for="role" class="col-sm-2 col-sm-offset-2 control-label">
-              Role</label>
-            <div class="col-sm-4">
-              <select type="text" class="form-control" id="role" required>
-                <option>Superivisor</option>
-                <option>Employee</option>
-              </select>
-            </div>
-          </div>
+          <!--<div class="form-group">-->
+            <!--<label for="role" class="col-sm-2 col-sm-offset-2 control-label">-->
+              <!--Role</label>-->
+            <!--<div class="col-sm-4">-->
+              <!--<select type="text" class="form-control" id="role" required>-->
+                <!--<option>Supervisor</option>-->
+                <!--<option>Employee</option>-->
+              <!--</select>-->
+            <!--</div>-->
+          <!--</div>-->
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
             </div>
           </div>
           <div class="form-group last">
-            <div class="col-sm-12" style="text-align: center;">
-              <button type="submit" class="btn btn-success btn-md">
+            <div class="col-sm-12 text-center">
+              <button type="submit" class="btn btn-success btn-md" (click)="submitForm()">
                 Save</button>
               <button type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>
