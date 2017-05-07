@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AdminComponent } from '../admin/admin.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UsersComponent } from '../users/users.component';
+import { UsersRegistryComponent } from '../users-registry/users-registry.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,10 @@ import { UsersComponent } from '../users/users.component';
           {
             path: 'users',
             component: UsersComponent
+          },
+          {
+            path: 'registry',
+            component: UsersRegistryComponent
           }
         ]
      }
