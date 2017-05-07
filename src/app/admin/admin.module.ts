@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import {AdminComponent} from './admin.component';
+import { UsersComponent } from '../users/users.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {AdminComponent} from './admin.component';
   ],
   declarations: [
     AdminComponent,
-    DashboardComponent
+    DashboardComponent,
+    UsersComponent
   ],
   exports: [AdminComponent]
 })
