@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import {AdminComponent} from './admin.component';
-import { EmptyComponent } from '../empty/empty.component';
 
 
 @NgModule({
@@ -14,8 +13,7 @@ import { EmptyComponent } from '../empty/empty.component';
   ],
   declarations: [
     AdminComponent,
-    DashboardComponent,
-    EmptyComponent
+    DashboardComponent
   ],
   exports: [AdminComponent]
 })
