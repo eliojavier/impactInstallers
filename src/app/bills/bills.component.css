@@ -1,0 +1,34 @@
+#new{
+  float: right;
+  font-size: 17px;
+  font-weight: 600;
+  color:dodgerblue;
+}
+
+#new i{
+  font-size: 20px;
+}
+
+.btn-success{
+  background: dodgerblue;
+  color:white;
+  border: solid 1px transparent;
+}
+
+.btn-success:hover{
+  background: white;
+  color:dodgerblue;
+  border: solid 1px dodgerblue;
+}
+
+.btn-cancel{
+  background: red;
+  color:white;
+  border: solid 1px transparent;
+}
+
+.btn-cancel:hover{
+  background: white;
+  color:red;
+  border: solid 1px red;
+}
