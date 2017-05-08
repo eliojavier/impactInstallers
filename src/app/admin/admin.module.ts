@@ -9,6 +9,9 @@ import { UsersComponent } from '../users/users.component';
 import { LocationsComponent } from '../locations/locations.component';
 import { BillsComponent } from '../bills/bills.component';
 
+// import {DataTableModule} from "angular2-datatable";
+import { DataTablesModule } from 'angular-datatables';
+
 
 
 @NgModule({
@@ -16,7 +19,8 @@ import { BillsComponent } from '../bills/bills.component';
     CommonModule,
     AdminRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataTablesModule
   ],
   declarations: [
     AdminComponent,
