@@ -9,6 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { LoginComponent } from './login/login.component';
+import {CalendarComponent} from 'angular2-fullcalendar/src/calendar/calendar';
+
 
 
 
@@ -16,14 +18,15 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    AdminModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent],

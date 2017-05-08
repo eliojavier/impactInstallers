@@ -7,6 +7,7 @@ import { AdminComponent } from './admin.component';
 import { UsersComponent } from '../users/users.component';
 import { LocationsComponent } from '../locations/locations.component';
 import { BillsComponent } from '../bills/bills.component';
+import { AssignmentsComponent } from '../assignments/assignments.component';
 
 
 
@@ -20,7 +21,8 @@ import { BillsComponent } from '../bills/bills.component';
     DashboardComponent,
     UsersComponent,
     LocationsComponent,
-    BillsComponent
+    BillsComponent,
+    AssignmentsComponent
   ],
   exports: [AdminComponent]
 })
