@@ -4,8 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from '../dashboard/dashboard.component';
-import {AdminComponent} from './admin.component';
+import { AdminComponent } from './admin.component';
 import { UsersComponent } from '../users/users.component';
+import { LocationsComponent } from '../locations/locations.component';
+import { BillsComponent } from '../bills/bills.component';
+
 
 
 @NgModule({
@@ -18,7 +21,9 @@ import { UsersComponent } from '../users/users.component';
   declarations: [
     AdminComponent,
     DashboardComponent,
-    UsersComponent
+    UsersComponent,
+    LocationsComponent,
+    BillsComponent
   ],
   exports: [AdminComponent]
 })
