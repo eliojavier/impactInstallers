@@ -10,10 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { LoginComponent } from './login/login.component';
 
-// import {DataTableModule} from "angular2-datatable";
-import { DataTablesModule } from 'angular-datatables';
-
-
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   declarations: [
@@ -28,7 +25,7 @@ import { DataTablesModule } from 'angular-datatables';
     HttpModule,
     AppRoutingModule,
     AdminModule,
-    DataTablesModule
+    Ng2SmartTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],

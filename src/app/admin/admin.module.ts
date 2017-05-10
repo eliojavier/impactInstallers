@@ -9,9 +9,7 @@ import { UsersComponent } from '../users/users.component';
 import { LocationsComponent } from '../locations/locations.component';
 import { BillsComponent } from '../bills/bills.component';
 
-// import {DataTableModule} from "angular2-datatable";
-import { DataTablesModule } from 'angular-datatables';
-
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
 @NgModule({
@@ -20,7 +18,7 @@ import { DataTablesModule } from 'angular-datatables';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    DataTablesModule
+    Ng2SmartTableModule
   ],
   declarations: [
     AdminComponent,
