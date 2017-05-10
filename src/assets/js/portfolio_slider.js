@@ -1,5 +1,5 @@
 $(function(){
-$("#elastic_grid_demo").elastic_grid({	
+$("#elastic_grid_demo").elastic_grid({
 	'hoverDirection': true,
 	'hoverDelay': 0,
 	'hoverInverse': false,
@@ -201,7 +201,7 @@ $("#elastic_grid_demo").elastic_grid({
 			],
 			'tags'  : ['Jquery', 'Design']
 			}
-	 
+
 		]
 	});
 });

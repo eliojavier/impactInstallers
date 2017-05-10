@@ -9,9 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { LoginComponent } from './login/login.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 // import {DataTableModule} from "angular2-datatable";
-// import { DataTablesModule } from 'angular-datatables';
+// import { DataTablesModule } from '@swimlane/ngx-datatable';
 
 
 
@@ -27,7 +28,8 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
-    AdminModule
+    AdminModule,
+    NgxDatatableModule
   ],
   providers: [],
   bootstrap: [AppComponent],
