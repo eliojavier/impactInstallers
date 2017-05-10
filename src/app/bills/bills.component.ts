@@ -11,7 +11,7 @@ export class BillsComponent implements OnInit {
   public billForm: FormGroup;
   selected: any[] = [];
   rows = [
-    {id: 1, billNumber: '123', clientName: 'Elio Acosta', total: '$120'},
+    {id: 1, billNumber: '123', clientName: 'Elio Acosta', total: '$120', details: [{quantity: '1', desc: 'Windows', cost: '$100'}]},
     {id: 2, billNumber: '2233', clientName: 'Miguel Pérez', total: '$400'},
     {id: 3, billNumber: '4344', clientName: 'Jessica Pérez', total: '$200'}
   ];
@@ -68,32 +68,22 @@ export class BillsComponent implements OnInit {
 
   onClick() {
     this.modal.alert()
-      .size('sm')
+      // .size('sm')
       .showClose(true)
       .title('Bill ')
       .body(`
-              <h4>Client name: </h4>
+              <h4>Client name: {{rows.clientName}}</h4>
               <h4>Details</h4>
-                <!--<ul>-->
-                  <!--<li>Quantity: </li>-->
-                  <!--<li>Description: </li>-->
-                  <!--<li>Cost: </li>-->
-                <!--</ul>-->
-                <!--<ul>-->
-                  <!--<li>Quantity: </li>-->
-                  <!--<li>Description: </li>-->
-                  <!--<li>Cost: </li>-->
-                <!--</ul>-->
                 <table style="width:100%">
                   <tr>
                     <th>Quantity</th>
                     <th>Description</th>
                     <th>Cost</th>
                   </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Windows</td>
-                    <td>$100</td>
+                  <tr ng-repeat="row in rows">
+                    <td>{{row.details.quantity}}</td>
+                    <td></td>
+                    <td></td>
                   </tr>
                  </table>
                 <h4>Tax: </h4>
