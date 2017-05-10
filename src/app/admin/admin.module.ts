@@ -9,9 +9,9 @@ import { UsersComponent } from '../users/users.component';
 import { LocationsComponent } from '../locations/locations.component';
 import { BillsComponent } from '../bills/bills.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ModalModule } from 'angular2-modal';
+import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 
-// import {DataTableModule} from "angular2-datatable";
-// import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -21,7 +21,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ModalModule.forRoot(),
+    BootstrapModalModule
   ],
   declarations: [
     AdminComponent,

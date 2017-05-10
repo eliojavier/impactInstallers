@@ -10,9 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { LoginComponent } from './login/login.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ModalModule } from 'angular2-modal';
+import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 
-// import {DataTableModule} from "angular2-datatable";
-// import { DataTablesModule } from '@swimlane/ngx-datatable';
 
 
 
@@ -29,7 +29,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     HttpModule,
     AppRoutingModule,
     AdminModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ModalModule.forRoot(),
+    BootstrapModalModule
   ],
   providers: [],
   bootstrap: [AppComponent],
