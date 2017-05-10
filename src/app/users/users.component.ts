@@ -9,6 +9,12 @@ import { Validators, FormBuilder } from '@angular/forms';
 })
 export class UsersComponent implements OnInit {
 
+  selected: any[] = [];
+  rows = [
+    { id: 1, name: 'Elio', lastName: 'Acosta', documentId: '12221', email: 'eliojavier@gmail.com', address: 'San Martin', phone: '2782922' },
+    { id: 2, name: 'Jessica', lastName: 'Perez', documentId: '12223', email: 'jess@gmail.com', address: 'San Antonio', phone: '111111' }
+  ];
+
   public registerForm = this.formBuilder.group({
     first_name: ['', Validators.required],
     last_name: ['', Validators.required],
@@ -25,8 +31,16 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
   }
 
-  submitForm(){
+  submitForm() {
     console.log(this.registerForm.value);
+  }
+
+  onSelect(event) {
+    console.log('Event: select', event, this.selected);
+  }
+
+  delete() {
+    console.log('delete');
   }
 
 }

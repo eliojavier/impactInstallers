@@ -21,49 +21,53 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="example1" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>Rendering engine</th>
-                <th>Browser</th>
-                <th>Platform(s)</th>
-                <th>Engine version</th>
-                <th>CSS grade</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>Webkit</td>
-                <td>Safari 1.3</td>
-                <td>OSX.3</td>
-                <td>312.8</td>
-                <td>A</td>
-              </tr>
-              <tr>
-                <td>Webkit</td>
-                <td>Safari 2.0</td>
-                <td>OSX.4+</td>
-                <td>419.3</td>
-                <td>A</td>
-              </tr>
-              <tr>
-                <td>Webkit</td>
-                <td>Safari 3.0</td>
-                <td>OSX.4+</td>
-                <td>522.1</td>
-                <td>A</td>
-              </tr>
-              </tbody>
-              <tfoot>
-              <tr>
-                <th>Rendering engine</th>
-                <th>Browser</th>
-                <th>Platform(s)</th>
-                <th>Engine version</th>
-                <th>CSS grade</th>
-              </tr>
-              </tfoot>
-            </table>
+            <ngx-datatable
+              class="material"
+              [columnMode]="'flex'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="'auto'"
+              [selected]="selected"
+              [selectionType]="'row'"
+              (select)="onSelect($event)"
+              [limit]="10"
+              [rows]=rows>
+              <ngx-datatable-column name="Name" [flexGrow]="1">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Last Name" [flexGrow]="1">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{value}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Document ID" [flexGrow]="1">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Email" [flexGrow]="2">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Address" [flexGrow]="2">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Phone" [flexGrow]="1">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Action" [flexGrow]="1">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  <a (click)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a>
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
           </div>
           <!-- /.box-body -->
         </div>
@@ -153,9 +157,3 @@
   </section>
   <!-- /.content -->
 </div>
-
-<script>
-  $(function () {
-    $("#example1").DataTable();
-  });
-</script>

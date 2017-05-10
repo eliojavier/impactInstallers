@@ -9,20 +9,11 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 export class BillsComponent implements OnInit {
   public billForm: FormGroup;
   selected: any[] = [];
-  // public filterQuery = "";
-  // public rowsOnPage = 10;
-  // public sortBy = "age";
-  // public sortOrder = "asc";
   rows = [
     { id: 1, billNumber: '123', clientName: 'Elio Acosta', total: '$120'},
     { id: 2, billNumber: '2233', clientName: 'Miguel Pérez', total: '$400' },
     { id: 3, billNumber: '4344', clientName: 'Jessica Pérez', total: '$200' }
   ];
-  // columns = [
-  //   { name: 'Bill Number' },
-  //   { name: 'Client Name' },
-  //   { name: 'Total' }
-  // ];
 
   constructor(private formBuilder: FormBuilder) { }
 
