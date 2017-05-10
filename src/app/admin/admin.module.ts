@@ -10,7 +10,7 @@ import { LocationsComponent } from '../locations/locations.component';
 import { BillsComponent } from '../bills/bills.component';
 
 // import {DataTableModule} from "angular2-datatable";
-import { DataTablesModule } from 'angular-datatables';
+// import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -19,8 +19,7 @@ import { DataTablesModule } from 'angular-datatables';
     CommonModule,
     AdminRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    DataTablesModule
+    ReactiveFormsModule
   ],
   declarations: [
     AdminComponent,
