@@ -3,8 +3,22 @@
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 @import '../../assets/admin/bootstrap/css/bootstrap.min.css';
 
-li{
-  list-style: none;
+table, th, tr, td{
+  border:solid 1px lightblue;
+  text-align: center;
+
+}
+
+th{
+  background: lightblue;
+}
+
+.bill{
+  border-top: solid 3px dodgerblue;
+  background: ghostwhite;
+  border-radius: 3px;
+  color:black;
+  box-shadow: gainsboro;
 }
 
 #new{

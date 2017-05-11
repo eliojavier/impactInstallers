@@ -11,9 +11,9 @@ export class BillsComponent implements OnInit {
   public billForm: FormGroup;
   selected: any[] = [];
   rows = [
-    {id: 1, billNumber: '123', clientName: 'Elio Acosta', total: '$120', details: [{quantity: '1', desc: 'Windows', cost: '$100'}]},
-    {id: 2, billNumber: '2233', clientName: 'Miguel Pérez', total: '$400'},
-    {id: 3, billNumber: '4344', clientName: 'Jessica Pérez', total: '$200'}
+    {id: 1, billNumber: '123', clientName: 'Elio Acosta', total: '$120', details: [{quantity: '1', desc: 'Windows', cost: '$100'}, {quantity: '2', desc: 'Door', cost: '$200'}, {quantity: '2', desc: 'Door', cost: '$200'}, {quantity: '2', desc: 'Door', cost: '$200'}, {quantity: '2', desc: 'Door', cost: '$200'}, {quantity: '2', desc: 'Door', cost: '$200'}, {quantity: '2', desc: 'Door', cost: '$200'}]},
+    {id: 2, billNumber: '2233', clientName: 'Miguel Pérez', total: '$400', details: [{quantity: '1', desc: 'Windows', cost: '$100'}]},
+    {id: 3, billNumber: '4344', clientName: 'Jessica Pérez', total: '$200', details: [{quantity: '1', desc: 'Windows', cost: '$100'}]}
   ];
 
   get version(): string {
@@ -64,31 +64,5 @@ export class BillsComponent implements OnInit {
 
   delete() {
     console.log('delete');
-  }
-
-  onClick() {
-    this.modal.alert()
-      // .size('sm')
-      .showClose(true)
-      .title('Bill ')
-      .body(`
-              <h4>Client name: {{rows.clientName}}</h4>
-              <h4>Details</h4>
-                <table style="width:100%">
-                  <tr>
-                    <th>Quantity</th>
-                    <th>Description</th>
-                    <th>Cost</th>
-                  </tr>
-                  <tr ng-repeat="row in rows">
-                    <td>{{row.details.quantity}}</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                 </table>
-                <h4>Tax: </h4>
-                <h4>Total: </h4>
-            `)
-      .open();
   }
 }
