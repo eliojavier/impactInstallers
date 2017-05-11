@@ -48,7 +48,7 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="1">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <a (click)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a><a><i class="fa fa-eye"></i></a>
+                  <a (click)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
@@ -60,7 +60,6 @@
     <div class="row">
       <div class="col-md-12" *ngFor="let sel of selected">
         <h1><b>Bill</b> {{sel.billNumber}}</h1>
-        <a><i class="fa fa-close"></i></a>
         <br>
         <div class="col-md-10 col-md-offset-1 bill">
           <h4><b>Client name:</b> {{sel.clientName}}</h4>
@@ -68,7 +67,7 @@
           <table style="width:100%">
             <tr>
               <th>Quantity</th>
-              <th>Desc</th>
+              <th>Description</th>
               <th>Cost</th>
             </tr>
             <tr *ngFor="let det of sel.details">
@@ -155,17 +154,14 @@
                 Cancel</button>
             </div>
           </div>
-
           <!--<div class="margin-20">-->
             <!--<div>myForm details:-</div>-->
             <!--<pre>Is myForm valid?: <br>{{billForm.valid | json}}</pre>-->
             <!--<pre>form value: <br>{{billForm.value | json}}</pre>-->
           <!--</div>-->
         </form>
-
       </div>
     </div>
-
   </section>
 </div>
 
