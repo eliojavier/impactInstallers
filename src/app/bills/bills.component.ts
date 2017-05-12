@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { Modal } from 'angular2-modal/plugins/bootstrap';
 
 @Component({
   selector: 'app-bills',
@@ -16,12 +15,7 @@ export class BillsComponent implements OnInit {
     {id: 3, billNumber: '4344', clientName: 'Jessica Pérez', total: '$200', details: [{quantity: '1', desc: 'Windows', cost: '$100'}]}
   ];
 
-  get version(): string {
-    return (<any>window).angular2ModalVer;
-  }
-
-  constructor(private formBuilder: FormBuilder, vcRef: ViewContainerRef, public modal: Modal) {
-    modal.overlay.defaultViewContainer = vcRef;
+  constructor(private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {

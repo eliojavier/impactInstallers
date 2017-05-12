@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
 import { AdminComponent } from '../admin/admin.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UsersComponent } from '../users/users.component';
 import { LocationsComponent } from '../locations/locations.component';
 import { BillsComponent } from '../bills/bills.component';
+import { AssignmentsComponent } from '../assignments/assignments.component';
 
 @NgModule({
   imports: [
@@ -28,6 +28,10 @@ import { BillsComponent } from '../bills/bills.component';
           {
             path: 'bills',
             component: BillsComponent
+          },
+          {
+            path: 'assignments',
+            component: AssignmentsComponent
           }
         ]
      }
