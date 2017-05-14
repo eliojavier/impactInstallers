@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "@types/jquery": "^2.0.43",
+    "angular2-modal": "^2.0.3",
     "core-js": "^2.4.1",
     "jquery": "^3.2.1",
     "ng2-smart-table": "^1.1.0",

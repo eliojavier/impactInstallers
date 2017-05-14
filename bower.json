@@ -1,0 +1,21 @@
+{
+  "name": "impact-installers",
+  "description": "",
+  "main": "",
+  "authors": [
+    "joesanel <eliojavier86@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/eliojavier/impactInstallers",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "jquery-ui": "^1.12.1"
+  }
+}

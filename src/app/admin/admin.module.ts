@@ -11,6 +11,9 @@ import { BillsComponent } from '../bills/bills.component';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
+import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+import { ModalModule } from 'angular2-modal';
+
 
 @NgModule({
   imports: [
@@ -18,7 +21,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    BootstrapModalModule,
+    ModalModule
   ],
   declarations: [
     AdminComponent,

@@ -12,12 +12,33 @@
   </section>
 
 
-
-
-  <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
-
-
-
+  <div class="col-md-10 col-md-offset-1 margin-15">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <caption>{{total}} results found</caption>
+        <caption>showing results from {{from}} to {{to}}</caption>
+        <thead>
+        <tr>
+          <th (click)="sortByBillNumber()"> Bill Number</th>
+          <th (click)="sortByClientName()"> Client Name</th>
+          <th (click)="sortByTotal()"> Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let bill of bills" (click)="showDetails(bill)">
+          <td>{{bill.bill_number}}</td>
+          <td>{{bill.client_name}}</td>
+          <td>{{bill.total}}</td>
+          <!--<td (click)="openModal(item)">ADD EDIT ETC...</td>-->
+        </tr>
+        </tbody>
+        <tfoot>
+            <button (click)="getMoreResults(previous)" class="btn btn-primary">Previous</button>
+            <button (click)="getMoreResults(next)" class="btn btn-primary">Next</button>
+        </tfoot>
+      </table>
+    </div>
+  </div>
 
 
   <div class="row">
@@ -39,11 +60,8 @@
 
       <form [formGroup]="billForm" novalidate (ngSubmit)="save(billForm)">
         <div class="form-group">
-          <label>Name</label>
+          <label>Client Name *</label>
           <input type="text" class="form-control" formControlName="client_name">
-          <small *ngIf="!billForm.controls.client_name.valid" class="text-danger">
-            Name is required (minimum 5 characters).
-          </small>
         </div>
         <!--details-->
         <div formArrayName="details">
@@ -87,14 +105,45 @@
           <pre>form value: <br>{{billForm.value | json}}</pre>
         </div>
       </form>
-
     </div>
   </div>
   <!-- /.content -->
 </div>
 
-<!--<script>-->
-<!--$(function () {-->
-<!--$("#example1").DataTable();-->
-<!--});-->
-<!--</script>-->
+<!-- Modal -->
+<div class="modal fade" id="details" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center"><strong>Invoice details</strong></h4>
+      </div>
+      <div class="modal-body text-center">
+        <table class="table">
+          <thead>
+          <tr>
+            <td><strong>Description</strong></td>
+            <td><strong>Quantity</strong></td>
+            <td><strong>Unitary price</strong></td>
+            <td><strong>Tax</strong></td>
+            <td><strong>Total</strong></td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let detail of invoiceDetails">
+            <td>{{detail.description}}</td>
+            <td>{{detail.quantity}}</td>
+            <td>{{detail.unitary_price}}</td>
+            <td>{{detail.tax}}</td>
+            <td>{{detail.total}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

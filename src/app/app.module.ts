@@ -12,6 +12,9 @@ import { LoginComponent } from './login/login.component';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
+import { ModalModule } from 'angular2-modal';
+import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +28,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     HttpModule,
     AppRoutingModule,
     AdminModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    ModalModule,
+    BootstrapModalModule
   ],
   providers: [],
   bootstrap: [AppComponent],
