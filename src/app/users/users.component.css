@@ -9,6 +9,11 @@
   font-size: 20px;
 }
 
+#new:hover{
+  color:darkblue;
+  cursor:pointer;
+}
+
 .btn-success{
   background: dodgerblue;
   color:white;
@@ -31,4 +36,26 @@
   background: white;
   color:red;
   border: solid 1px red;
+}
+
+.fa-trash{
+  font-size: 20px;
+  color:red;
+  padding: 5px;
+}
+
+.fa-edit{
+  font-size: 20px;
+  color:dodgerblue;
+  padding: 5px;
+}
+
+.fa-trash:hover{
+  color:darkred;
+  cursor:pointer;
+}
+
+.fa-edit:hover{
+  color:darkblue;
+  cursor:pointer;
 }
