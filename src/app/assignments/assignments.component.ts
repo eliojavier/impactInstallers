@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-assignments',
@@ -16,5 +17,15 @@ export class AssignmentsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  @ViewChild('childModal') public childModal: ModalDirective;
+
+  public showChildModal(): void {
+    this.childModal.show();
+  }
+
+  public hideChildModal(): void {
+    this.childModal.hide();
   }
 }

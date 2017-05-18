@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -17,7 +18,8 @@ import { AssignmentsComponent } from '../assignments/assignments.component';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ModalModule.forRoot(),
   ],
   declarations: [
     AdminComponent,

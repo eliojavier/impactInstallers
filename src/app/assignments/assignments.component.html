@@ -64,12 +64,37 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="1">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <a (click)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a>
+                  <a (click)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a><a (click)="showChildModal()"><i class="fa fa-clock-o"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
           </div>
           <!-- /.box-body -->
+        </div>
+        <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title pull-left">Change Status</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form style="text-align: center">
+                  <select style="width: 100%; height: 35px; border-radius: 6px">
+                    <option>Active</option>
+                    <option>Canceled</option>
+                    <option>Done</option>
+                  </select>
+                  <div style="padding-top: 5%;">
+                  <button style="text-align: center" type="submit" class="btn btn-success btn-md">
+                    Save</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

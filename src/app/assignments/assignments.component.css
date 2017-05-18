@@ -46,6 +46,13 @@
   margin-top: 1%;
 }
 
+.fa-clock-o{
+  font-size: 20px;
+  color:orange;
+  padding: 5px;
+  margin-top: 1%;
+}
+
 .fa-trash:hover{
   color:darkred;
   cursor:pointer;
@@ -53,6 +60,11 @@
 
 .fa-edit:hover{
   color:darkblue;
+  cursor:pointer;
+}
+
+.fa-clock-o:hover{
+  color:darkorange;
   cursor:pointer;
 }
 
