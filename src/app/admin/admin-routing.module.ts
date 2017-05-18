@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { AdminComponent } from '../admin/admin.component';
+import { AdminComponent } from './admin.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UsersComponent } from '../users/users.component';
 import { LocationsComponent } from '../locations/locations.component';
 import { BillsComponent } from '../bills/bills.component';
+import { BarChartComponent } from '../bar-chart/bar-chart.component';
+import { FullCalendarComponent } from '../full-calendar/full-calendar.component';
+
 
 @NgModule({
   imports: [
@@ -28,7 +31,15 @@ import { BillsComponent } from '../bills/bills.component';
           {
             path: 'bills',
             component: BillsComponent
-          }
+          },
+          {
+            path: 'barchart',
+            component: BarChartComponent
+          },
+          {
+            path: 'full-calendar',
+            component: FullCalendarComponent
+          },
         ]
      }
     ])

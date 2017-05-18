@@ -148,7 +148,6 @@ export class BillsComponent implements OnInit {
 
   getMoreResults(url){
     this.billService.getMoreResults(url)
-
       .subscribe(
         response => {
           if (response) {

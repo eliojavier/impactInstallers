@@ -8,11 +8,12 @@ import { AdminComponent } from './admin.component';
 import { UsersComponent } from '../users/users.component';
 import { LocationsComponent } from '../locations/locations.component';
 import { BillsComponent } from '../bills/bills.component';
+import { BarChartComponent } from '../bar-chart/bar-chart.component';
+import { FullCalendarComponent } from '../full-calendar/full-calendar.component';
+import {CalendarComponent} from 'ap-angular2-fullcalendar/src/calendar/calendar';
 
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { ChartsModule } from 'ng2-charts';
 
-import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
-import { ModalModule } from 'angular2-modal';
 
 
 @NgModule({
@@ -21,16 +22,18 @@ import { ModalModule } from 'angular2-modal';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2SmartTableModule,
-    BootstrapModalModule,
-    ModalModule
+    ChartsModule
+
   ],
   declarations: [
     AdminComponent,
     DashboardComponent,
     UsersComponent,
     LocationsComponent,
-    BillsComponent
+    BillsComponent,
+    BarChartComponent,
+    FullCalendarComponent,
+    CalendarComponent
   ],
   exports: [AdminComponent]
 })

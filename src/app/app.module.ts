@@ -10,10 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { LoginComponent } from './login/login.component';
 
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { ChartsModule } from 'ng2-charts';
 
-import { ModalModule } from 'angular2-modal';
-import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,9 +26,8 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
     HttpModule,
     AppRoutingModule,
     AdminModule,
-    Ng2SmartTableModule,
-    ModalModule,
-    BootstrapModalModule
+    ChartsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],
