@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewEncapsulation , ViewChild} from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-bills',
@@ -58,5 +59,15 @@ export class BillsComponent implements OnInit {
 
   delete() {
     console.log('delete');
+  }
+
+  @ViewChild('childModal') public childModal: ModalDirective;
+
+  public showChildModal(): void {
+    this.childModal.show();
+  }
+
+  public hideChildModal(): void {
+    this.childModal.hide();
   }
 }

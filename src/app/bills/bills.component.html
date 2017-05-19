@@ -48,7 +48,7 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="1">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <a (click)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a>
+                  <a (click)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a><a (click)="showChildModal()"><i class="fa fa-eye"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
@@ -57,31 +57,42 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12" *ngFor="let sel of selected">
-        <h1><b>Bill</b> {{sel.billNumber}}</h1>
-        <br>
-        <div class="col-md-10 col-md-offset-1 bill">
-          <h4><b>Client name:</b> {{sel.clientName}}</h4>
-          <br>
-          <table style="width:100%">
-            <tr>
-              <th>Quantity</th>
-              <th>Description</th>
-              <th>Cost</th>
-            </tr>
-            <tr *ngFor="let det of sel.details">
-              <td>{{det.quantity}}</td>
-              <td>{{det.desc}}</td>
-              <td>{{det.cost}}</td>
-            </tr>
-          </table>
-          <h4><b>Tax: </b></h4>
-          <h4><b>Total:</b> {{sel.total}}</h4>
+    <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content" *ngFor="let sel of selected">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left"><b>Bill</b> {{sel.billNumber}}</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="bill">
+              <h4><b>Client name:</b> {{sel.clientName}}</h4>
+              <br>
+              <div class="col-md-offset-1 col-md-10">
+                <table  style="margin-bottom: 2%">
+                  <tr>
+                    <th>Quantity</th>
+                    <th>Description</th>
+                    <th>Cost</th>
+                  </tr>
+                  <tr *ngFor="let det of sel.details">
+                    <td>{{det.quantity}}</td>
+                    <td>{{det.desc}}</td>
+                    <td>{{det.cost}}</td>
+                  </tr>
+                </table>
+              </div>
+              <h4>
+                <b>Tax: </b>
+              </h4>
+              <h4><b>Total:</b> {{sel.total}}</h4>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
 
     <div class="row">
       <div class="col-md-12">

@@ -4,21 +4,18 @@
 @import '../../assets/admin/bootstrap/css/bootstrap.min.css';
 
 table, th, tr, td{
-  border:solid 1px lightblue;
+  border:solid 1px lightsteelblue;
   text-align: center;
 
 }
 
 th{
-  background: lightblue;
+  background: lightsteelblue;
 }
 
 .bill{
-  border-top: solid 3px dodgerblue;
-  background: ghostwhite;
-  border-radius: 3px;
+  background: transparent;
   color:black;
-  box-shadow: gainsboro;
 }
 
 #new{
@@ -70,6 +67,13 @@ th{
   margin-top: 1%;
 }
 
+.fa-eye{
+  font-size: 20px;
+  color:orange;
+  padding: 5px;
+  margin-top: 1%;
+}
+
 .fa-trash:hover{
   color:darkred;
   cursor:pointer;
@@ -77,6 +81,11 @@ th{
 
 .fa-edit:hover{
   color:darkblue;
+  cursor:pointer;
+}
+
+.fa-eye:hover{
+  color:darkorange;
   cursor:pointer;
 }
 
