@@ -12,12 +12,8 @@ export class UsersComponent implements OnInit {
 
   public errorMsg: string;
   selected: any[] = [];
-  // rows = [{ id: 1, name: 'Elio', lastName: 'Acosta', documentId: '12221', email: 'eliojavier@gmail.com', address: 'San Martin', phone: '2782922' },
-  //   { id: 2, name: 'Jessica', lastName: 'Perez', documentId: '12223', email: 'jess@gmail.com', address: 'San Antonio', phone: '111111' }
-  // ];
   rows = [];
   private body: any;
-  private sel: any[];
 
   public registerForm = this.formBuilder.group({
     first_name: ['', Validators.required],

@@ -17,13 +17,13 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Data Table With Full Features</h3>
+            <h3 class="box-title">Assignments</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
             <ngx-datatable
               class="material"
-              [columnMode]="'force'"
+              [columnMode]="'flex'"
               [headerHeight]="50"
               [footerHeight]="50"
               [rowHeight]="'auto'"
@@ -111,40 +111,44 @@
       </section>
       <br><br>
       <div class="col-md-12">
-        <form class="form-horizontal" role="form">
+        <form [formGroup]="assignmentsForm" class="form-horizontal" role="form">
           <div class="form-group">
-            <label for="name" class="col-md-2 col-md-offset-2 control-label">
+            <label class="col-md-2 col-md-offset-2 control-label">
               Installer</label>
             <div class="col-md-4">
-              <select type="text" class="form-control" id="name" required></select>
+              <select type="text" class="form-control" formControlName="name" required>
+                <option *ngFor="let x of installers" [value]="x.id" [selected]="x.id">{{x.name +' '+ x.lastName}}</option>
+              </select>
             </div>
           </div>
           <div class="form-group">
-            <label for="date" class="col-md-2 col-md-offset-2 control-label">
+            <label class="col-md-2 col-md-offset-2 control-label">
               Date</label>
             <div class="col-md-4">
-              <input type="date" class="form-control" id="date" required>
+              <input type="date" class="form-control" formControlName="date" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="time" class="col-md-2 col-md-offset-2 control-label">
+            <label class="col-md-2 col-md-offset-2 control-label">
               Time</label>
             <div class="col-md-4">
-              <input type="time" class="form-control" id="time" required>
+              <input type="time" class="form-control" formControlName="time" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="location" class="col-md-2 col-md-offset-2 control-label">
+            <label class="col-md-2 col-md-offset-2 control-label">
               Location</label>
             <div class="col-md-4">
-              <select type="text" class="form-control" id="location" required></select>
+              <select type="text" class="form-control" formControlName="location" required>
+                <option *ngFor="let x of locations" [value]="x.id" [selected]="x.id">{{x.name}}</option>
+              </select>
             </div>
           </div>
           <div class="form-group">
-            <label for="address" class="col-md-2 col-md-offset-2 control-label">
+            <label class="col-md-2 col-md-offset-2 control-label">
               Address</label>
             <div class="col-md-4">
-              <input type="text" class="form-control" id="address" required>
+              <input type="text" class="form-control" formControlName="address" required>
             </div>
           </div>
           <div class="form-group">
