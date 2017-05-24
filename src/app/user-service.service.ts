@@ -7,13 +7,32 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class UserServiceService {
-public baseURI = 'http://localhost:8000/'
+public baseURI = 'http://localhost:8000/api/'
   constructor(public http: Http) {
 
   }
 
   getUsers() {
-    return this.http.get(this.baseURI + 'api/users')
+    return this.http.get(this.baseURI + 'users')
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  saveUser(body) {
+    return this.http.post(this.baseURI + 'users', body)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  updateUser(id) {
+    return this.http.get(this.baseURI + 'users', {params: { user : id }})
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  deleteUser(id) {
+    // return this.http.delete(this.baseURI + 'users', {params: { user : id }})
+    return this.http.delete(this.baseURI + 'users/' + id)
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }

@@ -12,10 +12,12 @@ export class UsersComponent implements OnInit {
 
   public errorMsg: string;
   selected: any[] = [];
-  rows = [];
-    // { id: 1, name: 'Elio', lastName: 'Acosta', documentId: '12221', email: 'eliojavier@gmail.com', address: 'San Martin', phone: '2782922' },
-    // { id: 2, name: 'Jessica', lastName: 'Perez', documentId: '12223', email: 'jess@gmail.com', address: 'San Antonio', phone: '111111' }
+  // rows = [{ id: 1, name: 'Elio', lastName: 'Acosta', documentId: '12221', email: 'eliojavier@gmail.com', address: 'San Martin', phone: '2782922' },
+  //   { id: 2, name: 'Jessica', lastName: 'Perez', documentId: '12223', email: 'jess@gmail.com', address: 'San Antonio', phone: '111111' }
   // ];
+  rows = [];
+  private body: any;
+  private sel: any[];
 
   public registerForm = this.formBuilder.group({
     first_name: ['', Validators.required],
@@ -35,7 +37,7 @@ export class UsersComponent implements OnInit {
         response => {
           if (response) {
             console.log(response);
-            this.rows = response.users;
+            this.rows = response.data;
           }
         },
         error => this.errorMsg = error,
@@ -44,14 +46,46 @@ export class UsersComponent implements OnInit {
 
   submitForm() {
     console.log(this.registerForm.value);
+    this.body = {
+      name: this.registerForm.value.first_name,
+      last_name: this.registerForm.value.last_name,
+      id_document: this.registerForm.value.doc_id,
+      email: this.registerForm.value.email,
+      address: this.registerForm.value.address,
+      phone: this.registerForm.value.phone
+    };
+    this.userService.saveUser(this.body)
+      .subscribe(
+        response => {
+          // if (response.status) {
+            console.log(response.status);
+          // }
+        },
+        error => this.errorMsg = error
+      );
   }
 
-  onSelect(event) {
-    console.log('Event: select', event, this.selected);
-  }
+  // onSelect(event) {
+  //   // console.log(this.selected[0].id);
+  //   // return this.selected[0].id;
+  //   // console.log(this.selected[0].id);
+  // }
+
+  // delete() {
+  //   console.log('borrar ' + this.selected[0].id);
+  // }
 
   delete() {
-    console.log('delete');
+    console.log('borrar ' + this.selected[0].id);
+    this.userService.deleteUser(this.selected[0].id)
+      .subscribe(
+        response => {
+          // if (response.status) {
+          console.log(response.status);
+          // }
+        },
+        error => this.errorMsg = error
+      );
   }
 
 }

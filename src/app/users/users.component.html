@@ -28,8 +28,7 @@
               [footerHeight]="50"
               [rowHeight]="'auto'"
               [selected]="selected"
-              [selectionType]="'row'"
-              (select)="onSelect($event)"
+              [selectionType]="'cell'"
               [limit]="10"
               [rows]=rows>
               <ngx-datatable-column name="Name" [flexGrow]="1">
@@ -64,7 +63,7 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="1">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <a (click)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a>
+                  <a (dblclick)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
@@ -86,57 +85,47 @@
       </section>
       <br><br>
       <div class="col-md-12">
-        <form class="form-horizontal" role="form">
+        <form [formGroup]="registerForm" class="form-horizontal" role="form">
           <div class="form-group">
-            <label for="name" class="col-md-2 col-md-offset-2 control-label">
+            <label class="col-md-2 col-md-offset-2 control-label">
               Name</label>
             <div class="col-md-4">
-              <input type="text" class="form-control" id="name" required>
+              <input type="text" class="form-control" formControlName="first_name" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="lastname" class="col-md-2 col-md-offset-2 control-label">
-              Lastname</label>
+            <label class="col-md-2 col-md-offset-2 control-label">
+              Last Name</label>
             <div class="col-md-4">
-              <input type="text" class="form-control" id="lastname" required>
+              <input type="text" class="form-control" formControlName="last_name" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="iddoc" class="col-md-2 col-md-offset-2 control-label">
+            <label class="col-md-2 col-md-offset-2 control-label">
               ID Document</label>
             <div class="col-md-4">
-              <input type="text" class="form-control" id="iddoc" required>
+              <input type="text" class="form-control" formControlName="doc_id" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="email" class="col-md-2 col-md-offset-2 control-label">
+            <label class="col-md-2 col-md-offset-2 control-label">
               Email</label>
             <div class="col-md-4">
-              <input type="text" class="form-control" id="email" required>
+              <input type="text" class="form-control" formControlName="email" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="phone" class="col-md-2 col-md-offset-2 control-label">
+            <label class="col-md-2 col-md-offset-2 control-label">
               Phone</label>
             <div class="col-md-4">
-              <input type="number" class="form-control" id="phone" required>
+              <input type="number" class="form-control" formControlName="phone" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="address" class="col-md-2 col-md-offset-2 control-label">
+            <label class="col-md-2 col-md-offset-2 control-label">
               Address</label>
             <div class="col-md-4">
-              <input type="text" class="form-control" id="address" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="role" class="col-md-2 col-md-offset-2 control-label">
-              Role</label>
-            <div class="col-md-4">
-              <select type="text" class="form-control" id="role" required>
-                <option>Superivisor</option>
-                <option>Employee</option>
-              </select>
+              <input type="text" class="form-control" formControlName="address" required>
             </div>
           </div>
           <div class="form-group">
@@ -145,7 +134,7 @@
           </div>
           <div class="form-group last">
             <div class="col-md-12" style="text-align: center;">
-              <button type="submit" class="btn btn-success btn-md">
+              <button (click)="submitForm()" type="submit" class="btn btn-success btn-md">
                 Save</button>
               <button type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>
