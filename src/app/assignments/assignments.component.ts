@@ -67,26 +67,24 @@ export class AssignmentsComponent implements OnInit {
 
   }
 
-  // submitForm() {
-  //   console.log(this.assignmentsForm.value);
-  //   this.body = {
-  //     name: this.assignmentsForm.value.name,
-  //     date: this.assignmentsForm.value.date,
-  //     time: this.assignmentsForm.value.time,
-  //     location: this.assignmentsForm.value.location,
-  //     address: this.assignmentsForm.value.address,
-  //   };
-  //
-  //   this.assignmentService.saveAssignment(this.body)
-  //     .subscribe(
-  //       response => {
-  //         // if (response.status) {
-  //         console.log(response.status);
-  //         // }
-  //       },
-  //       error => this.errorMsg = error
-  //     );
-  // }
+  submitForm() {
+    console.log(this.assignmentsForm.value);
+    this.body = {
+      name: this.assignmentsForm.value.name,
+      date: this.assignmentsForm.value.date,
+      time: this.assignmentsForm.value.time,
+      location: this.assignmentsForm.value.location,
+      address: this.assignmentsForm.value.address,
+    };
+
+    this.assignmentService.saveAssignment(this.body)
+      .subscribe(
+        response => {
+          console.log(response.status);
+        },
+        error => this.errorMsg = error
+      );
+  }
 
   @ViewChild('childModal') public childModal: ModalDirective;
 

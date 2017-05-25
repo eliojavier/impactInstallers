@@ -19,6 +19,25 @@ export class LocationServiceService {
       .catch(this.errorHandler);
   }
 
+  saveLocation(body) {
+    return this.http.post(this.baseURI + 'locations', body)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  updateLocation(id) {
+    return this.http.get(this.baseURI + 'locations', {params: { location : id }})
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  deleteLocation(id) {
+    // return this.http.delete(this.baseURI + 'users', {params: { user : id }})
+    return this.http.delete(this.baseURI + 'locations/' + id)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
   errorHandler(error: Response) {
     console.log(error);
     return Observable.throw(error || 'server error');

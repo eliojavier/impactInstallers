@@ -31,12 +31,6 @@ export class AssignmentServiceService {
       .catch(this.errorHandler);
   }
 
-  deleteAssignment(id) {
-    return this.http.delete(this.baseURI + 'assignments/' + id)
-      .map((response: Response) => response.json())
-      .catch(this.errorHandler);
-  }
-
   errorHandler(error: Response) {
     console.log(error);
     return Observable.throw(error || 'server error');

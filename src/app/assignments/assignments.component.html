@@ -23,7 +23,7 @@
           <div class="box-body">
             <ngx-datatable
               class="material"
-              [columnMode]="'flex'"
+              [columnMode]="'force'"
               [headerHeight]="50"
               [footerHeight]="50"
               [rowHeight]="'auto'"
@@ -64,7 +64,7 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="1">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <a (click)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a><a (click)="showChildModal()"><i class="fa fa-clock-o"></i></a>
+                  <a><i class="fa fa-edit"></i></a><a (click)="showChildModal()"><i class="fa fa-clock-o"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
@@ -157,7 +157,7 @@
           </div>
           <div class="form-group last">
             <div class="col-md-12" style="text-align: center;">
-              <button type="submit" class="btn btn-success btn-md">
+              <button (click)="submitForm()" type="submit" class="btn btn-success btn-md">
                 Save</button>
               <button type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>
