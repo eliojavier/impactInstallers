@@ -18,6 +18,12 @@ public baseURI = 'http://localhost:8000/api/'
       .catch(this.errorHandler);
   }
 
+  getAvailableUsers() {
+    return this.http.get(this.baseURI + 'users/available')
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
   saveUser(body) {
     return this.http.post(this.baseURI + 'users', body)
       .map((response: Response) => response.json())

@@ -24,6 +24,8 @@ export class AssignmentsComponent implements OnInit {
     name: ['', Validators.required],
     date: ['', Validators.required],
     time: ['', Validators.required],
+    clientName: ['', Validators.required],
+    clientEmail: ['', Validators.required],
     location: ['', Validators.required],
     address: ['', Validators.required],
   });
@@ -43,7 +45,7 @@ export class AssignmentsComponent implements OnInit {
         error => this.errorMsg = error,
       );
 
-    this.userService.getUsers()
+    this.userService.getAvailableUsers()
       .subscribe(
         response => {
           if (response) {
@@ -73,6 +75,8 @@ export class AssignmentsComponent implements OnInit {
       name: this.assignmentsForm.value.name,
       date: this.assignmentsForm.value.date,
       time: this.assignmentsForm.value.time,
+      clientName: this.assignmentsForm.value.clientName,
+      clientEmail: this.assignmentsForm.value.clientEmail,
       location: this.assignmentsForm.value.location,
       address: this.assignmentsForm.value.address,
     };
