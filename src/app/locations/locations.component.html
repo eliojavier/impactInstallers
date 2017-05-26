@@ -53,7 +53,8 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="1">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <a (dblclick)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a>
+                  <a (dblclick)="delete()"><i class="fa fa-trash"></i></a>
+                  <a data-toggle="collapse" data-target="#registry" (dblclick)="getLocation(); buttonFalse()"><i class="fa fa-edit"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
@@ -64,7 +65,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <a id="new" data-toggle="collapse" data-target="#registry"><i class="fa fa-plus-circle"></i> New Location</a>
+        <a (click)="buttonTrue()" id="new" data-toggle="collapse" data-target="#registry"><i class="fa fa-plus-circle"></i> New Location</a>
       </div>
     </div>
     <div class="row collapse" id="registry">
@@ -88,7 +89,7 @@
               State</label>
             <div class="col-md-4">
               <select type="text" class="form-control" formControlName="state" required>
-                <option>Florida</option>
+                <option value="Florida">Florida</option>
               </select>
             </div>
           </div>
@@ -97,7 +98,7 @@
               City</label>
             <div class="col-md-4">
               <select type="text" class="form-control" formControlName="city" required>
-                <option>Miami</option>
+                <option value="Miami">Miami</option>
               </select>
             </div>
           </div>
@@ -105,19 +106,19 @@
             <label class="col-md-2 col-md-offset-2 control-label">
               Postal Code</label>
             <div class="col-md-4">
-              <input type="number" class="form-control" formControlName="postalCode" required>
+              <input type="text" class="form-control" formControlName="postalCode" required>
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-2 col-md-offset-2 control-label">
-              Lat</label>
+              Latitude</label>
             <div class="col-md-4">
               <input type="number" class="form-control" formControlName="lat" required>
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-2 col-md-offset-2 control-label">
-              Long</label>
+              Longitude</label>
             <div class="col-md-4">
               <input type="number" class="form-control" formControlName="long" required>
             </div>
@@ -126,10 +127,19 @@
             <div class="col-md-offset-3 col-md-5">
             </div>
           </div>
-          <div class="form-group last">
+          <div class="form-group last" *ngIf="save">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="submitForm()" type="submit" class="btn btn-success btn-md">
+              <button (click)="submitForm()" class="btn btn-success btn-md">
                 Save</button>
+              <button type="submit" class="btn btn-cancel btn-md">
+                Cancel</button>
+            </div>
+          </div>
+
+          <div class="form-group last" *ngIf="!save">
+            <div class="col-md-12" style="text-align: center;">
+              <button (click)="updateLocation()" class="btn btn-success btn-md">
+                Edit</button>
               <button type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>
             </div>

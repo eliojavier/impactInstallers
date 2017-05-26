@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, URLSearchParams, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Http, Response, URLSearchParams, RequestOptions} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -9,6 +9,7 @@ import 'rxjs/add/observable/throw';
 export class LocationServiceService {
 
   public baseURI = 'http://localhost:8000/api/'
+
   constructor(public http: Http) {
 
   }
@@ -25,8 +26,8 @@ export class LocationServiceService {
       .catch(this.errorHandler);
   }
 
-  updateLocation(id) {
-    return this.http.get(this.baseURI + 'locations', {params: { location : id }})
+  updateLocation(id, body) {
+    return this.http.put(this.baseURI + 'locations/' + id, body)
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }
@@ -34,6 +35,12 @@ export class LocationServiceService {
   deleteLocation(id) {
     // return this.http.delete(this.baseURI + 'users', {params: { user : id }})
     return this.http.delete(this.baseURI + 'locations/' + id)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  getLocation(id) {
+    return this.http.get(this.baseURI + 'locations/' + id)
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }
