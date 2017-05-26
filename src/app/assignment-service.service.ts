@@ -8,7 +8,8 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class AssignmentServiceService {
 
-  public baseURI = 'http://localhost:8000/api/'
+  public baseURI = 'http://localhost:8000/api/';
+  private body: any;
   constructor(public http: Http) {
 
   }
@@ -27,6 +28,12 @@ export class AssignmentServiceService {
 
   updateAssignment(id) {
     return this.http.get(this.baseURI + 'assignments', {params: { assignment : id }})
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  updateStatus(id, body) {
+    return this.http.put(this.baseURI + 'assignments/status/' + id, body)
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }

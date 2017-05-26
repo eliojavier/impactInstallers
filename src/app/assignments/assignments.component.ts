@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalDirective } from 'ngx-bootstrap/modal';
-import { AssignmentServiceService } from '../assignment-service.service';
-import { UserServiceService } from '../user-service.service';
-import { LocationServiceService } from '../location-service.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ModalDirective} from 'ngx-bootstrap/modal';
+import {AssignmentServiceService} from '../assignment-service.service';
+import {UserServiceService} from '../user-service.service';
+import {LocationServiceService} from '../location-service.service';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-assignments',
@@ -30,10 +30,21 @@ export class AssignmentsComponent implements OnInit {
     address: ['', Validators.required],
   });
 
+  public changeStatus = this.formBuilder.group({
+    status: ['', Validators.required],
+  });
+
   constructor(public formBuilder: FormBuilder, private assignmentService: AssignmentServiceService,
-              private userService: UserServiceService, private  locationService: LocationServiceService) { }
+              private userService: UserServiceService, private  locationService: LocationServiceService) {
+  }
 
   ngOnInit() {
+    this.getAssignments();
+    this.getLocations();
+    this.getUsers();
+  }
+
+  getAssignments() {
     this.assignmentService.getAssignments()
       .subscribe(
         response => {
@@ -44,7 +55,9 @@ export class AssignmentsComponent implements OnInit {
         },
         error => this.errorMsg = error,
       );
+  }
 
+  getUsers() {
     this.userService.getAvailableUsers()
       .subscribe(
         response => {
@@ -55,7 +68,9 @@ export class AssignmentsComponent implements OnInit {
         },
         error => this.errorMsg = error,
       );
+  }
 
+  getLocations() {
     this.locationService.getLocations()
       .subscribe(
         response => {
@@ -66,7 +81,6 @@ export class AssignmentsComponent implements OnInit {
         },
         error => this.errorMsg = error,
       );
-
   }
 
   submitForm() {
@@ -85,6 +99,7 @@ export class AssignmentsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response.status);
+          this.getAssignments();
         },
         error => this.errorMsg = error
       );
@@ -100,4 +115,22 @@ export class AssignmentsComponent implements OnInit {
     this.childModal.hide();
   }
 
+  updateStatus() {
+    console.log(this.selected[0].id);
+    this.body = {
+      status: this.changeStatus.value.status
+    };
+
+    this.assignmentService.updateStatus(this.selected[0].id, this.body)
+      .subscribe(
+        response => {
+          console.log(response.status);
+          this.getAssignments();
+        },
+        error => this.errorMsg = error
+      );
+
+  }
 }
+
+

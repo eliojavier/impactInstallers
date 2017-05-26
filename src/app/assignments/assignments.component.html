@@ -29,7 +29,6 @@
               [rowHeight]="'auto'"
               [selected]="selected"
               [selectionType]="'row'"
-              (select)="onSelect($event)"
               [limit]="10"
               [rows]=rows>
               <ngx-datatable-column name="Installer Name" [flexGrow]="1">
@@ -69,7 +68,7 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="1">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <a><i class="fa fa-edit"></i></a><a (click)="showChildModal()"><i class="fa fa-clock-o"></i></a>
+                  <a><i class="fa fa-edit"></i></a><a (dblclick)="showChildModal()"><i class="fa fa-clock-o"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
@@ -86,14 +85,14 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form style="text-align: center">
-                  <select style="width: 100%; height: 35px; border-radius: 6px">
-                    <option>Active</option>
-                    <option>Canceled</option>
-                    <option>Done</option>
+                <form [formGroup]="changeStatus" style="text-align: center">
+                  <select formControlName="status" style="width: 100%; height: 35px; border-radius: 6px">
+                    <option value="Active">Active</option>
+                    <option value="Canceled">Canceled</option>
+                    <option value="Done">Done</option>
                   </select>
                   <div style="padding-top: 5%;">
-                  <button style="text-align: center" type="submit" class="btn btn-success btn-md">
+                  <button (click)="updateStatus(); hideChildModal()" style="text-align: center" type="submit" class="btn btn-success btn-md">
                     Save</button>
                   </div>
                 </form>
@@ -172,7 +171,7 @@
           </div>
           <div class="form-group last">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="submitForm()" type="submit" class="btn btn-success btn-md">
+              <button (click)="submitForm();" type="submit" class="btn btn-success btn-md">
                 Save</button>
               <button type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>

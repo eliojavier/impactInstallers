@@ -22,7 +22,7 @@
           <div class="box-body">
             <ngx-datatable
               class="material"
-              [columnMode]="'force'"
+              [columnMode]="'flex'"
               [headerHeight]="50"
               [footerHeight]="50"
               [rowHeight]="'auto'"
@@ -46,7 +46,7 @@
                   {{value}}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="Client Email" [flexGrow]="2">
+              <ngx-datatable-column name="Client Email" [flexGrow]="3">
                 <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                   {{value}}
                 </ng-template>
@@ -56,7 +56,7 @@
                   {{value}}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="Action" [flexGrow]="1">
+              <ngx-datatable-column name="Action" [flexGrow]="2">
                 <ng-template let-value="value" ngx-datatable-cell-template>
                  <a><i class="fa fa-edit"></i></a><a (click)="showChildModal()"><i class="fa fa-eye"></i></a>
                 </ng-template>
