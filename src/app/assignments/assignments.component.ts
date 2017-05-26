@@ -45,7 +45,17 @@ export class AssignmentsComponent implements OnInit {
         error => this.errorMsg = error,
       );
 
+<<<<<<< Updated upstream
     this.userService.getAvailableUsers()
+=======
+  getUsers() {
+    this.body = {
+      date: this.assignmentsForm.value.date,
+      time: this.assignmentsForm.value.time,
+    };
+
+    this.userService.getAvailableUsers(this.body)
+>>>>>>> Stashed changes
       .subscribe(
         response => {
           if (response) {

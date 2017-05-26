@@ -19,8 +19,8 @@ private body: any;
       .catch(this.errorHandler);
   }
 
-  getAvailableUsers() {
-    return this.http.get(this.baseURI + 'users/available')
+  getAvailableUsers(body) {
+    return this.http.get(this.baseURI + 'users/available/'+body.date+'/'+body.time)
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }
