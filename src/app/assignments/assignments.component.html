@@ -164,7 +164,7 @@
             <label class="col-md-2 col-md-offset-2 control-label">
               Installer</label>
             <div class="col-md-4">
-              <select type="text" class="form-control" formControlName="name" required>
+              <select (focus)="getUsers()" type="text" class="form-control" formControlName="name" required>
                 <option *ngFor="let x of installers" [value]="x.id" [selected]="x.id">{{x.name}}</option>
               </select>
             </div>

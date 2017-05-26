@@ -58,7 +58,13 @@ export class AssignmentsComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getAvailableUsers()
+    this.body = {
+      date: this.assignmentsForm.value.date,
+      time: this.assignmentsForm.value.time,
+    };
+
+    this.userService.getAvailableUsers(this.body)
+
       .subscribe(
         response => {
           if (response) {
