@@ -40,8 +40,8 @@ private body: any;
       .catch(this.errorHandler);
   }
 
-  updateUser(id) {
-    return this.http.get(this.baseURI + 'users', {params: { user : id }})
+  updateUser(id, body) {
+    return this.http.put(this.baseURI + 'users/' + id, body)
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }
@@ -49,6 +49,12 @@ private body: any;
   deleteUser(id) {
     // return this.http.delete(this.baseURI + 'users', {params: { user : id }})
     return this.http.delete(this.baseURI + 'users/' + id)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  getUser(id) {
+    return this.http.get(this.baseURI + 'users/' + id)
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }

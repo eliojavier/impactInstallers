@@ -12,6 +12,7 @@ import { BillServiceService } from '../bill-service.service';
 export class BillsComponent implements OnInit {
   public errorMsg: string;
   public billForm: FormGroup;
+  private body: any;
   selected: any[] = [];
   rows = [];
 
@@ -59,14 +60,31 @@ export class BillsComponent implements OnInit {
     control.removeAt(i);
   }
 
-  save() {
-    // call API to save
-    // ...
-    console.log(this.billForm.value);
-  }
+  // save() {
+  //   // call API to save
+  //   // ...
+  //   console.log(this.billForm.value);
+  // }
+  //
+  // onSelect(event) {
+  //   console.log('Event: select', event, this.selected);
+  // }
 
-  onSelect(event) {
-    console.log('Event: select', event, this.selected);
+  submitForm() {
+    console.log(this.billForm.value);
+    this.body = {
+      bill_number: this.billForm.value.bill_number,
+      details: this.formBuilder.array([
+        this.initDetails(),
+      ])
+    };
+    this.billService.saveBill(this.body)
+      .subscribe(
+        response => {
+          console.log(response.status);
+        },
+        error => this.errorMsg = error
+      );
   }
 
   @ViewChild('childModal') public childModal: ModalDirective;

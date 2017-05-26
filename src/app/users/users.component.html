@@ -28,7 +28,7 @@
               [footerHeight]="50"
               [rowHeight]="'auto'"
               [selected]="selected"
-              [selectionType]="'cell'"
+              [selectionType]="'single'"
               [limit]="10"
               [rows]=rows>
               <ngx-datatable-column name="Name" [flexGrow]="1">
@@ -63,7 +63,9 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="1">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <a (dblclick)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a><a (dblclick)="resetPassword()"><i class="fa fa-key"></i></a>
+                  <a (dblclick)="delete()"><i class="fa fa-trash"></i></a>
+                  <a data-toggle="collapse" data-target="#registry" (dblclick)="getUser(); buttonFalse()"><i class="fa fa-edit"></i></a>
+                  <a (dblclick)="resetPassword()"><i class="fa fa-key"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
@@ -74,7 +76,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <a id="new" data-toggle="collapse" data-target="#registry"><i class="fa fa-plus-circle"></i> New User</a>
+        <a (click)="buttonTrue()" id="new" data-toggle="collapse" data-target="#registry"><i class="fa fa-plus-circle"></i> New User</a>
       </div>
     </div>
     <div class="row collapse" id="registry">
@@ -132,14 +134,24 @@
             <div class="col-md-offset-3 col-md-5">
             </div>
           </div>
-          <div class="form-group last">
+          <div class="form-group last" *ngIf="save">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="submitForm()" type="submit" class="btn btn-success btn-md">
+              <button (click)="submitForm()" class="btn btn-success btn-md">
                 Save</button>
               <button type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>
             </div>
           </div>
+
+          <div class="form-group last" *ngIf="!save">
+            <div class="col-md-12" style="text-align: center;">
+              <button (click)="updateUser()" class="btn btn-success btn-md">
+                Edit</button>
+              <button type="submit" class="btn btn-cancel btn-md">
+                Cancel</button>
+            </div>
+          </div>
+
         </form>
       </div>
     </div>

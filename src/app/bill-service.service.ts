@@ -8,13 +8,19 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class BillServiceService {
 
-  public baseURI = 'http://localhost:8000/api/'
+  public baseURI = 'http://localhost:8000/api/';
   constructor(public http: Http) {
 
   }
 
   getBills() {
     return this.http.get(this.baseURI + 'bills')
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  saveBill(body) {
+    return this.http.post(this.baseURI + 'bills', body)
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }
