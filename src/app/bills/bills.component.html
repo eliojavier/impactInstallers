@@ -29,9 +29,14 @@
               [selected]="selected"
               [selectionType]="'row'"
               (select)="onSelect($event)"
-              [limit]="3"
+              [limit]="10"
               [rows]=rows>
               <ngx-datatable-column name="Bill Number" [flexGrow]="2">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Date" [flexGrow]="2">
                 <ng-template let-value="value" ngx-datatable-cell-template>
                   {{value}}
                 </ng-template>
@@ -53,7 +58,7 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="1">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <a (click)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a><a (click)="showChildModal()"><i class="fa fa-eye"></i></a>
+                 <a><i class="fa fa-edit"></i></a><a (click)="showChildModal()"><i class="fa fa-eye"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
@@ -82,9 +87,9 @@
                     <th>Description</th>
                     <th>Cost</th>
                   </tr>
-                  <tr *ngFor="let det of sel.details">
+                  <tr *ngFor="let det of sel.details.data">
                     <td>{{det.quantity}}</td>
-                    <td>{{det.desc}}</td>
+                    <td>{{det.description}}</td>
                     <td>{{det.cost}}</td>
                   </tr>
                 </table>
@@ -121,10 +126,24 @@
             </small>
           </div>
           <div class="form-group">
+            <label>Date</label>
+            <input type="number" class="form-control" formControlName="date">
+            <small *ngIf="!billForm.controls.date.valid" class="text-danger">
+              Number is required.
+            </small>
+          </div>
+          <div class="form-group">
             <label>Client Name</label>
-            <input type="text" class="form-control" formControlName="client_name">
-            <small *ngIf="!billForm.controls.client_name.valid" class="text-danger">
-              Name is required (minimum 5 characters).
+            <input type="text" class="form-control" formControlName="clientName">
+            <small *ngIf="!billForm.controls.clientName.valid" class="text-danger">
+              Name is required.
+            </small>
+          </div>
+          <div class="form-group">
+            <label>Client Email</label>
+            <input type="text" class="form-control" formControlName="clientEmail">
+            <small *ngIf="!billForm.controls.clientEmail.valid" class="text-danger">
+              Name is required.
             </small>
           </div>
           <!--details-->

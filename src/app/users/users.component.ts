@@ -84,4 +84,14 @@ export class UsersComponent implements OnInit {
       );
   }
 
+  resetPassword() {
+    this.userService.resetPassword(this.selected[0].id)
+      .subscribe(
+        response => {
+          console.log(response.status);
+        },
+        error => this.errorMsg = error
+      );
+  }
+
 }

@@ -63,7 +63,7 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="1">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <a (dblclick)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a>
+                  <a (dblclick)="delete()"><i class="fa fa-trash"></i></a><a><i class="fa fa-edit"></i></a><a (dblclick)="resetPassword()"><i class="fa fa-key"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>

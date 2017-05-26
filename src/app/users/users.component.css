@@ -50,6 +50,12 @@
   padding: 5px;
 }
 
+.fa-key{
+  font-size: 20px;
+  color:orange;
+  padding: 5px;
+}
+
 .fa-trash:hover{
   color:darkred;
   cursor:pointer;
@@ -57,5 +63,10 @@
 
 .fa-edit:hover{
   color:darkblue;
+  cursor:pointer;
+}
+
+.fa-key:hover{
+  color:darkorange;
   cursor:pointer;
 }

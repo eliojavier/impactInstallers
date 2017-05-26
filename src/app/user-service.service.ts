@@ -7,7 +7,8 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class UserServiceService {
-public baseURI = 'http://localhost:8000/api/'
+public baseURI = 'http://localhost:8000/api/';
+private body: any;
   constructor(public http: Http) {
 
   }
@@ -20,6 +21,15 @@ public baseURI = 'http://localhost:8000/api/'
 
   getAvailableUsers() {
     return this.http.get(this.baseURI + 'users/available')
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  resetPassword(id) {
+    this.body = {
+      password: '12345',
+    };
+    return this.http.put(this.baseURI + 'users/password/' + id, this.body)
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }
