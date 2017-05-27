@@ -145,37 +145,49 @@ $(function () {
    * ------------
    * Create a world map with markers
    */
-  $('#world-map-markers').vectorMap({
-    map: 'us_aea',
-    normalizeFunction: 'polynomial',
-    hoverOpacity: 0.7,
-    hoverColor: false,
-    backgroundColor: 'transparent',
-    regionStyle: {
-      initial: {
-        fill: 'rgba(210, 214, 222, 1)',
-        "fill-opacity": 1,
-        stroke: 'none',
-        "stroke-width": 0,
-        "stroke-opacity": 1
+
+  $.getJSON('http://localhost:8000/api/reports/rankingLocations', function (data) {
+    // $.ajax({
+    //   url: 'http://localhost:8000/api/reports/rankingLocations',
+    //   dataType: 'jsonp',
+    //   success: function (data) {
+    console.log('hola ' + JSON.parse(data));
+    // var markers = data.markers;
+    // var i = 0;
+    // for (var marker in markers) {
+    //   i++;
+    // console.log(markers[i].name, markers[i].latLng);
+    $('#world-map-markers').vectorMap({
+      map: 'us_aea',
+      normalizeFunction: 'polynomial',
+      hoverOpacity: 0.7,
+      hoverColor: false,
+      backgroundColor: 'transparent',
+      regionStyle: {
+        initial: {
+          fill: 'rgba(210, 214, 222, 1)',
+          "fill-opacity": 1,
+          stroke: 'none',
+          "stroke-width": 0,
+          "stroke-opacity": 1
+        },
+        hover: {
+          "fill-opacity": 0.7,
+          cursor: 'pointer'
+        },
+        selected: {
+          fill: 'yellow'
+        },
+        selectedHover: {}
       },
-      hover: {
-        "fill-opacity": 0.7,
-        cursor: 'pointer'
-      },
-      selected: {
-        fill: 'yellow'
-      },
-      selectedHover: {}
-    },
-    markerStyle: {
-      initial: {
-        fill: '#00a65a',
-        stroke: '#111'
+      markerStyle: {
+        initial: {
+          fill: '#00a65a',
+          stroke: '#111'
+        }
       }
-    },
-    markers: [
-       {latLng: [25.817576, -80.360310], name: 'Doral'}
+      // markers: [
+      // {name: markers[i].name}
       // {latLng: [43.73, 7.41], name: 'Monaco'},
       // {latLng: [-0.52, 166.93], name: 'Nauru'},
       // {latLng: [-8.51, 179.21], name: 'Tuvalu'},
@@ -201,7 +213,8 @@ $(function () {
       // {latLng: [-20.2, 57.5], name: 'Mauritius'},
       // {latLng: [26.02, 50.55], name: 'Bahrain'},
       // {latLng: [0.33, 6.73], name: 'São Tomé and Príncipe'}
-    ]
+      // ]
+    });
   });
 
   /* SPARKLINE CHARTS

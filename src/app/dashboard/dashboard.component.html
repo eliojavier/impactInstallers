@@ -128,36 +128,12 @@
                 </div>
               </div>
               <!-- /.col -->
-              <div class="col-md-3 col-sm-4">
-                <div class="pad box-pane-right bg-green" style="min-height: 280px">
-                  <div class="description-block margin-bottom">
-                    <!--<div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>-->
-                    <h5 class="description-header">Doral</h5>
-                    <span class="description-text">50</span>
+              <div class="col-md-3 col-sm-4" (focus)="getRankingLocations()">
+                <div class="pad box-pane-right bg-green" *ngFor="let report of reports">
+                  <div class="description-block">
+                    <h5 class="description-header">{{report.name}}</h5>
+                    <span class="description-text">{{report.quantity}}</span>
                   </div>
-                  <!-- /.description-block -->
-                  <div class="description-block margin-bottom">
-                    <!--<div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>-->
-                    <h5 class="description-header">Miami Beach</h5>
-                    <span class="description-text">32</span>
-                  </div>
-                  <!-- /.description-block -->
-                  <div class="description-block margin-bottom">
-                    <!--<div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>-->
-                    <h5 class="description-header">Brickell</h5>
-                    <span class="description-text">22</span>
-                  </div>
-                  <div class="description-block margin-bottom">
-                    <!--<div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>-->
-                    <h5 class="description-header">Hialeah</h5>
-                    <span class="description-text">12</span>
-                  </div>
-                  <div class="description-block margin-bottom">
-                    <!--<div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>-->
-                    <h5 class="description-header">Fort Lauderdale</h5>
-                    <span class="description-text">7</span>
-                  </div>
-                  <!-- /.description-block -->
                 </div>
               </div>
               <!-- /.col -->
