@@ -19,6 +19,18 @@ export class ReportsServiceService {
       .catch(this.errorHandler);
   }
 
+  getRankingInstallers() {
+    return this.http.get(this.baseURI + 'reports/rankingInstallers')
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  getRankingCommissions(body) {
+    return this.http.get(this.baseURI + 'reports/rankingCommissions/'+body.month+'/'+body.year)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
   errorHandler(error: Response) {
     console.log(error);
     return Observable.throw(error || 'server error');

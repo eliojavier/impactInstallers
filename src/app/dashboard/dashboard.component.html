@@ -14,57 +14,10 @@
   <!-- Main content -->
   <section class="content">
     <div class="row">
-      <div class="col-md-8">
-        <div class="box">
-          <div class="box-header with-border">
-            <h3 class="box-title">Monthly Recap Report</h3>
-
-            <div class="box-tools pull-right">
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-              <div class="btn-group">
-                <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-wrench"></i></button>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                </ul>
-              </div>
-              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <div class="row">
-              <div class="col-md-12">
-                <p class="text-center">
-                  <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                </p>
-
-                <div class="chart">
-                  <!-- Sales Chart Canvas -->
-                  <canvas id="salesChart" style="height: 180px;"></canvas>
-                </div>
-                <!-- /.chart-responsive -->
-              </div>
-
-            </div>
-            <!-- /.row -->
-          </div>
-        </div>
-        <!-- /.box -->
-      </div>
-      <div class="col-md-4">
-        <!-- Info Boxes Style 2 -->
-
-        <!-- /.info-box -->
-
+      <div class="col-md-6">
         <div class="box box-default">
           <div class="box-header with-border">
-            <h3 class="box-title">Browser Usage</h3>
+            <h3 class="box-title">Ranking of Installers</h3>
 
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -75,79 +28,160 @@
           <!-- /.box-header -->
           <div class="box-body">
             <div class="row">
-              <div class="col-md-8">
-                <div class="chart-responsive">
-                  <canvas id="pieChart" height="150"></canvas>
-                </div>
-                <!-- ./chart-responsive -->
-              </div>
-              <!-- /.col -->
-              <div class="col-md-4">
-                <ul class="chart-legend clearfix">
-                  <li><i class="fa fa-circle-o text-aqua"></i> Windows</li>
-                  <li><i class="fa fa-circle-o text-gray"></i> Doors</li>
-                </ul>
-              </div>
-              <!-- /.col -->
-            </div>
-            <!-- /.row -->
-          </div>
-          <!-- /.box-body -->
-          <!-- /.footer -->
-        </div>
-        <!-- /.box -->
-        <!-- /.box -->
-      </div>
-      <!-- /.col -->
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
-
-    <!-- Main row -->
-    <div class="row">
-      <!-- Left col -->
-      <div class="col-md-12">
-        <!-- MAP & BOX PANE -->
-        <div class="box box-success">
-          <div class="box-header with-border">
-            <h3 class="box-title">Visitors Report</h3>
-
-            <div class="box-tools pull-right">
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body no-padding">
-            <div class="row">
-              <div class="col-md-9 col-sm-8">
-                <div class="pad">
-                  <!-- Map will be created here -->
-                  <div id="world-map-markers" style="height: 325px;"></div>
-                </div>
-              </div>
-              <!-- /.col -->
-              <div class="col-md-3 col-sm-4" (focus)="getRankingLocations()">
-                <div class="pad box-pane-right bg-green" *ngFor="let report of reports">
-                  <div class="description-block">
-                    <h5 class="description-header">{{report.name}}</h5>
-                    <span class="description-text">{{report.quantity}}</span>
+              <div class="col-xs-12">
+                <div class="box">
+                  <!-- /.box-header -->
+                  <div class="box-body">
+                    <ngx-datatable
+                      class="material"
+                      [columnMode]="'force'"
+                      [headerHeight]="50"
+                      [footerHeight]="50"
+                      [rowHeight]="'auto'"
+                      [limit]="10"
+                      [rows]=rows>
+                      <ngx-datatable-column name="Installer" [flexGrow]="2">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                          {{value}}
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Quantity" [flexGrow]="2">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                          {{value}}
+                        </ng-template>
+                      </ngx-datatable-column>
+                    </ngx-datatable>
                   </div>
+                  <!-- /.box-body -->
                 </div>
               </div>
-              <!-- /.col -->
             </div>
-            <!-- /.row -->
           </div>
-          <!-- /.box-body -->
         </div>
-        <!-- /.box -->
-
-        <!-- TABLE: LATEST ORDERS -->
-        <div class="box box-info">
+      </div>
+      <!-- /.box -->
+      <div class="col-md-6">
+        <div class="box box-default">
           <div class="box-header with-border">
-            <h3 class="box-title">Latest Orders</h3>
+            <h3 class="box-title">Ranking of Locations</h3>
+
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body" style="text-align: center">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="box">
+                  <!-- /.box-header -->
+                  <div class="box-body">
+                    <ngx-datatable
+                      class="material"
+                      [columnMode]="'force'"
+                      [headerHeight]="50"
+                      [footerHeight]="50"
+                      [rowHeight]="'auto'"
+                      [limit]="10"
+                      [rows]=reports>
+                      <ngx-datatable-column name="Name" [flexGrow]="2">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                          {{value}}
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Quantity" [flexGrow]="2">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                          {{value}}
+                        </ng-template>
+                      </ngx-datatable-column>
+                    </ngx-datatable>
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box box-default">
+          <div class="box-header with-border">
+            <h3 class="box-title">Ranking of Commissions</h3>
+
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+          <form [formGroup]="commissionData">
+            <div class="col-md-6">
+              <select formControlName="month" style="width: 100%; height: 35px; margin:3%">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <select formControlName="year" style="width: 100%; height: 35px; margin:3%" (change)="getRankingCommissions()">
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+              </select>
+            </div>
+          </form>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="box">
+                  <!-- /.box-header -->
+                  <div class="box-body">
+                    <ngx-datatable
+                      class="material"
+                      [columnMode]="'force'"
+                      [headerHeight]="50"
+                      [footerHeight]="50"
+                      [rowHeight]="'auto'"
+                      [limit]="10"
+                      [rows]=commissions>
+                      <ngx-datatable-column name="Installer" [flexGrow]="2">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                          {{value}}
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Commission" [flexGrow]="2">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                          {{value}}
+                        </ng-template>
+                      </ngx-datatable-column>
+                    </ngx-datatable>
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.box -->
+      <div class="col-md-6">
+        <div class="box box-default">
+          <div class="box-header with-border">
+            <h3 class="box-title">Ranking of Locations</h3>
 
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -157,88 +191,38 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <div class="table-responsive">
-              <table class="table no-margin">
-                <thead>
-                <tr>
-                  <th>Order ID</th>
-                  <th>Item</th>
-                  <th>Status</th>
-                  <th>Popularity</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                  <td>Call of Duty IV</td>
-                  <td><span class="label label-success">Shipped</span></td>
-                  <td>
-                    <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                  <td>Samsung Smart TV</td>
-                  <td><span class="label label-warning">Pending</span></td>
-                  <td>
-                    <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                  <td>iPhone 6 Plus</td>
-                  <td><span class="label label-danger">Delivered</span></td>
-                  <td>
-                    <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                  <td>Samsung Smart TV</td>
-                  <td><span class="label label-info">Processing</span></td>
-                  <td>
-                    <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                  <td>Samsung Smart TV</td>
-                  <td><span class="label label-warning">Pending</span></td>
-                  <td>
-                    <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                  <td>iPhone 6 Plus</td>
-                  <td><span class="label label-danger">Delivered</span></td>
-                  <td>
-                    <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                  <td>Call of Duty IV</td>
-                  <td><span class="label label-success">Shipped</span></td>
-                  <td>
-                    <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="box">
+                  <!-- /.box-header -->
+                  <div class="box-body">
+                    <ngx-datatable
+                      class="material"
+                      [columnMode]="'force'"
+                      [headerHeight]="50"
+                      [footerHeight]="50"
+                      [rowHeight]="'auto'"
+                      [limit]="10"
+                      [rows]=reports>
+                      <ngx-datatable-column name="Name" [flexGrow]="2">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                          {{value}}
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Quantity" [flexGrow]="2">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                          {{value}}
+                        </ng-template>
+                      </ngx-datatable-column>
+                    </ngx-datatable>
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+              </div>
             </div>
-            <!-- /.table-responsive -->
           </div>
-          <!-- /.box-body -->
-          <div class="box-footer clearfix">
-            <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-            <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
-          </div>
-          <!-- /.box-footer -->
         </div>
-        <!-- /.box -->
       </div>
-      <!-- /.col -->
     </div>
     <!-- /.row -->
   </section>
