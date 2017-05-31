@@ -14,23 +14,71 @@
   <!-- Main content -->
   <section class="content">
     <div class="row">
+      <div class="container-fluid">
+      <form [formGroup]="servicesData">
+        <div class="col-md-6">
+          <select formControlName="month" style="width: 103%; height: 35px; margin:3% -3%" data-placeholder="Select month">
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <select formControlName="year" style="width: 103%; height: 35px; margin:3% 0%" (change)="getQuantityServices()" data-placeholder="Select year">
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+          </select>
+        </div>
+      </form>
+      </div>
+      <div class="col-lg-6 col-md-6 col-xs-6">
+        <div class="small-box bg-aqua" style="height: 135px">
+          <div class="inner">
+            <h3>{{doors}}</h3>
+            <p>Doors</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-xs-6">
+        <div class="small-box bg-green"  style="height: 135px">
+          <div class="inner">
+            <h3>{{windows}}</h3>
+            <p>Windows</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-6">
         <div class="box box-default">
           <div class="box-header with-border">
             <h3 class="box-title">Ranking of Installers</h3>
-
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
               <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
           </div>
-          <!-- /.box-header -->
           <div class="box-body">
             <div class="row">
               <div class="col-xs-12">
                 <div class="box">
-                  <!-- /.box-header -->
                   <div class="box-body">
                     <ngx-datatable
                       class="material"
@@ -38,7 +86,7 @@
                       [headerHeight]="50"
                       [footerHeight]="50"
                       [rowHeight]="'auto'"
-                      [limit]="10"
+                      [limit]="3"
                       [rows]=rows>
                       <ngx-datatable-column name="Installer" [flexGrow]="2">
                         <ng-template let-value="value" ngx-datatable-cell-template>
@@ -52,31 +100,26 @@
                       </ngx-datatable-column>
                     </ngx-datatable>
                   </div>
-                  <!-- /.box-body -->
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- /.box -->
       <div class="col-md-6">
         <div class="box box-default">
           <div class="box-header with-border">
             <h3 class="box-title">Ranking of Locations</h3>
-
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
               <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
           </div>
-          <!-- /.box-header -->
           <div class="box-body" style="text-align: center">
             <div class="row">
               <div class="col-xs-12">
                 <div class="box">
-                  <!-- /.box-header -->
                   <div class="box-body">
                     <ngx-datatable
                       class="material"
@@ -98,7 +141,6 @@
                       </ngx-datatable-column>
                     </ngx-datatable>
                   </div>
-                  <!-- /.box-body -->
                 </div>
               </div>
             </div>
@@ -107,11 +149,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="box box-default">
           <div class="box-header with-border">
             <h3 class="box-title">Ranking of Commissions</h3>
-
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -120,7 +161,7 @@
           </div>
           <form [formGroup]="commissionData">
             <div class="col-md-6">
-              <select formControlName="month" style="width: 100%; height: 35px; margin:3%">
+              <select formControlName="month" style="width: 100%; height: 35px; margin:3% 0">
                 <option value="1">January</option>
                 <option value="2">February</option>
                 <option value="3">March</option>
@@ -136,19 +177,17 @@
               </select>
             </div>
             <div class="col-md-6">
-              <select formControlName="year" style="width: 100%; height: 35px; margin:3%" (change)="getRankingCommissions()">
+              <select formControlName="year" style="width: 100%; height: 35px; margin:3% 0" (change)="getRankingCommissions()">
                 <option value="2015">2015</option>
                 <option value="2016">2016</option>
                 <option value="2017">2017</option>
               </select>
             </div>
           </form>
-          <!-- /.box-header -->
           <div class="box-body">
             <div class="row">
               <div class="col-xs-12">
                 <div class="box">
-                  <!-- /.box-header -->
                   <div class="box-body">
                     <ngx-datatable
                       class="material"
@@ -170,53 +209,6 @@
                       </ngx-datatable-column>
                     </ngx-datatable>
                   </div>
-                  <!-- /.box-body -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /.box -->
-      <div class="col-md-6">
-        <div class="box box-default">
-          <div class="box-header with-border">
-            <h3 class="box-title">Ranking of Locations</h3>
-
-            <div class="box-tools pull-right">
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="box">
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    <ngx-datatable
-                      class="material"
-                      [columnMode]="'force'"
-                      [headerHeight]="50"
-                      [footerHeight]="50"
-                      [rowHeight]="'auto'"
-                      [limit]="10"
-                      [rows]=reports>
-                      <ngx-datatable-column name="Name" [flexGrow]="2">
-                        <ng-template let-value="value" ngx-datatable-cell-template>
-                          {{value}}
-                        </ng-template>
-                      </ngx-datatable-column>
-                      <ngx-datatable-column name="Quantity" [flexGrow]="2">
-                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                          {{value}}
-                        </ng-template>
-                      </ngx-datatable-column>
-                    </ngx-datatable>
-                  </div>
-                  <!-- /.box-body -->
                 </div>
               </div>
             </div>
@@ -224,8 +216,5 @@
         </div>
       </div>
     </div>
-    <!-- /.row -->
   </section>
-  <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->

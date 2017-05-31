@@ -31,6 +31,12 @@ export class ReportsServiceService {
       .catch(this.errorHandler);
   }
 
+  getQuantityServices(body) {
+    return this.http.get(this.baseURI + 'reports/quantityServices/'+body.month+'/'+body.year)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
   errorHandler(error: Response) {
     console.log(error);
     return Observable.throw(error || 'server error');

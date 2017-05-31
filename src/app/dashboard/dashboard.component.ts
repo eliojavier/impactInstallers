@@ -14,10 +14,17 @@ export class DashboardComponent implements OnInit {
   reports: any[] = [];
   rows: any[] = [];
   commissions: any[] = [];
+  doors: any[] = [];
+  windows: any[] = [];
   report: any;
   private body: any;
 
   public commissionData = this.formBuilder.group({
+    month: ['', Validators.required],
+    year: ['', Validators.required],
+  });
+
+  public servicesData = this.formBuilder.group({
     month: ['', Validators.required],
     year: ['', Validators.required],
   });
@@ -68,6 +75,25 @@ export class DashboardComponent implements OnInit {
           if (response) {
             console.log(response);
             this.commissions = response.commissions;
+          }
+        },
+        error => this.errorMsg = error,
+      );
+  }
+
+  getQuantityServices() {
+    this.body = {
+      month: this.servicesData.value.month,
+      year: this.servicesData.value.year,
+    };
+
+    this.reportsService.getQuantityServices(this.body)
+      .subscribe(
+        response => {
+          if (response) {
+            console.log(response);
+            this.doors = response.doors[0].quantity;
+            this.windows = response.windows[0].quantity;
           }
         },
         error => this.errorMsg = error,
