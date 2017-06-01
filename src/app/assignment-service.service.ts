@@ -26,14 +26,20 @@ export class AssignmentServiceService {
       .catch(this.errorHandler);
   }
 
-  updateAssignment(id) {
-    return this.http.get(this.baseURI + 'assignments', {params: { assignment : id }})
+  updateAssignment(id, body) {
+    return this.http.put(this.baseURI + 'assignments/' + id, body)
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }
 
   updateStatus(id, body) {
     return this.http.put(this.baseURI + 'assignments/status/' + id, body)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  getAssignment(id) {
+    return this.http.get(this.baseURI + 'assignments/' + id)
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }

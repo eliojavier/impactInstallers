@@ -19,6 +19,7 @@ export class AssignmentsComponent implements OnInit {
   private body: any;
   private installers: any;
   private locations: any;
+  private save: boolean;
 
   public assignmentsForm = this.formBuilder.group({
     name: ['', Validators.required],
@@ -138,6 +139,57 @@ export class AssignmentsComponent implements OnInit {
         error => this.errorMsg = error
       );
 
+  }
+
+  buttonTrue() {
+    this.save = true;
+    this.assignmentsForm.reset();
+  }
+
+  buttonFalse() {
+    this.save = false;
+    this.assignmentsForm.reset();
+  }
+
+  getAssignment() {
+    this.assignmentService.getAssignment(this.selected[0].id)
+      .subscribe(
+        response => {
+          console.log(response.assignment);
+          this.assignmentsForm = this.formBuilder.group({
+              name: response.assignment[0].name,
+              date: response.assignment[0].date,
+              time: response.assignment[0].time,
+              clientName: response.assignment[0].clientName,
+              clientEmail: response.assignment[0].clientEmail,
+              location: response.assignment[0].location,
+              address: response.assignment[0].address,
+            },
+            error => this.errorMsg = error
+          );
+        });
+  }
+  updateAssignment() {
+    console.log(this.assignmentsForm.value);
+    this.body = {
+      name: this.assignmentsForm.value.name,
+      date: this.assignmentsForm.value.date,
+      time: this.assignmentsForm.value.time,
+      clientName: this.assignmentsForm.value.clientName,
+      clientEmail: this.assignmentsForm.value.clientEmail,
+      location: this.assignmentsForm.value.location,
+      address: this.assignmentsForm.value.address,
+    };
+
+    this.assignmentService.updateAssignment(this.selected[0].id, this.body)
+      .subscribe(
+        response => {
+          console.log(response.status);
+          this.assignmentsForm.reset();
+          this.getAssignments();
+        },
+        error => this.errorMsg = error
+      );
   }
 }
 
