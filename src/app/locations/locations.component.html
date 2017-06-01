@@ -82,6 +82,9 @@
               Name</label>
             <div class="col-md-4">
               <input type="text" class="form-control" formControlName="name" required>
+              <small *ngIf="!locationsForm.controls.name.valid" class="text-danger">
+                Name is required.
+              </small>
             </div>
           </div>
           <div class="form-group">
@@ -91,6 +94,9 @@
               <select type="text" class="form-control" formControlName="state" required>
                 <option value="Florida">Florida</option>
               </select>
+              <small *ngIf="!locationsForm.controls.state.valid" class="text-danger">
+                State is required.
+              </small>
             </div>
           </div>
           <div class="form-group">
@@ -100,6 +106,9 @@
               <select type="text" class="form-control" formControlName="city" required>
                 <option value="Miami">Miami</option>
               </select>
+              <small *ngIf="!locationsForm.controls.city.valid" class="text-danger">
+                City is required.
+              </small>
             </div>
           </div>
           <div class="form-group">
@@ -107,6 +116,9 @@
               Postal Code</label>
             <div class="col-md-4">
               <input type="text" class="form-control" formControlName="postalCode" required>
+              <small *ngIf="!locationsForm.controls.postalCode.valid" class="text-danger">
+                Postal Code is required.
+              </small>
             </div>
           </div>
           <div class="form-group">
@@ -114,6 +126,9 @@
               Latitude</label>
             <div class="col-md-4">
               <input type="number" class="form-control" formControlName="lat" required>
+              <small *ngIf="!locationsForm.controls.lat.valid" class="text-danger">
+                Latitude is required.
+              </small>
             </div>
           </div>
           <div class="form-group">
@@ -121,12 +136,15 @@
               Longitude</label>
             <div class="col-md-4">
               <input type="number" class="form-control" formControlName="long" required>
+              <small *ngIf="!locationsForm.controls.long.valid" class="text-danger">
+                Longitude is required.
+              </small>
             </div>
           </div>
-          <div class="form-group">
-            <div class="col-md-offset-3 col-md-5">
-            </div>
-          </div>
+          <!--<div class="form-group">-->
+            <!--<div class="col-md-offset-3 col-md-5">-->
+            <!--</div>-->
+          <!--</div>-->
           <div class="form-group last" *ngIf="save">
             <div class="col-md-12" style="text-align: center;">
               <button (click)="submitForm()" class="btn btn-success btn-md">

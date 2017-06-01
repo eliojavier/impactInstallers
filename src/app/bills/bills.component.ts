@@ -20,6 +20,10 @@ export class BillsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getBills();
+  }
+
+  getBills() {
     this.billService.getBills()
       .subscribe(
         response => {
@@ -82,6 +86,8 @@ export class BillsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response.status);
+          this.billForm.reset();
+          this.getBills();
         },
         error => this.errorMsg = error
       );

@@ -121,6 +121,9 @@
               Date</label>
             <div class="col-md-4">
               <input type="date" class="form-control" formControlName="date" required>
+              <small *ngIf="!assignmentsForm.controls.date.valid" class="text-danger">
+                Date is required.
+              </small>
             </div>
           </div>
           <div class="form-group">
@@ -128,6 +131,9 @@
               Time</label>
             <div class="col-md-4">
               <input type="time" class="form-control" formControlName="time" required>
+              <small *ngIf="!assignmentsForm.controls.time.valid" class="text-danger">
+                Time is required.
+              </small>
             </div>
           </div>
           <div class="form-group">
@@ -135,6 +141,9 @@
               Client Name</label>
             <div class="col-md-4">
               <input type="text" class="form-control" formControlName="clientName" required>
+              <small *ngIf="!assignmentsForm.controls.clientName.valid" class="text-danger">
+                Client name is required.
+              </small>
             </div>
           </div>
           <div class="form-group">
@@ -142,6 +151,9 @@
               Client Email</label>
             <div class="col-md-4">
               <input type="text" class="form-control" formControlName="clientEmail" required>
+              <small *ngIf="!assignmentsForm.controls.clientEmail.valid" class="text-danger">
+                Client email is required.
+              </small>
             </div>
           </div>
           <div class="form-group">
@@ -151,6 +163,9 @@
               <select type="text" class="form-control" formControlName="location" required>
                 <option *ngFor="let x of locations" [value]="x.id" [selected]="x.id">{{x.name}}</option>
               </select>
+              <small *ngIf="!assignmentsForm.controls.location.valid" class="text-danger">
+                Location is required.
+              </small>
             </div>
           </div>
           <div class="form-group">
@@ -158,6 +173,9 @@
               Address</label>
             <div class="col-md-4">
               <input type="text" class="form-control" formControlName="address" required>
+              <small *ngIf="!assignmentsForm.controls.address.valid" class="text-danger">
+                Address is required.
+              </small>
             </div>
           </div>
           <div class="form-group">
@@ -167,6 +185,9 @@
               <select (focus)="getUsers()" type="text" class="form-control" formControlName="name" required>
                 <option *ngFor="let x of installers" [value]="x.id" [selected]="x.id">{{x.name}}</option>
               </select>
+              <small *ngIf="!assignmentsForm.controls.name.valid" class="text-danger">
+                Installer is required.
+              </small>
             </div>
           </div>
           <div class="form-group last">
