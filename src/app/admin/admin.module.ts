@@ -10,6 +10,7 @@ import { LocationsComponent } from '../locations/locations.component';
 import { BillsComponent } from '../bills/bills.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AssignmentsComponent } from '../assignments/assignments.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AssignmentsComponent } from '../assignments/assignments.component';
     UsersComponent,
     LocationsComponent,
     BillsComponent,
-    AssignmentsComponent
+    AssignmentsComponent,
+    ProfileComponent
   ],
   exports: [AdminComponent]
 })

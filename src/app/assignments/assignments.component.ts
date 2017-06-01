@@ -105,6 +105,7 @@ export class AssignmentsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response.status);
+          this.assignmentsForm.reset();
           this.getAssignments();
         },
         error => this.errorMsg = error
@@ -131,6 +132,7 @@ export class AssignmentsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response.status);
+          this.assignmentsForm.reset();
           this.getAssignments();
         },
         error => this.errorMsg = error

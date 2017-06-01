@@ -6,6 +6,7 @@ import { UsersComponent } from '../users/users.component';
 import { LocationsComponent } from '../locations/locations.component';
 import { BillsComponent } from '../bills/bills.component';
 import { AssignmentsComponent } from '../assignments/assignments.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,10 @@ import { AssignmentsComponent } from '../assignments/assignments.component';
           {
             path: 'assignments',
             component: AssignmentsComponent
+          },
+          {
+            path: 'profile',
+            component: ProfileComponent
           }
         ]
      }
