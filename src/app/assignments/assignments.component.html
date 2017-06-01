@@ -68,14 +68,18 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="1">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <a data-toggle="collapse" data-target="#registry" (dblclick)="getAssignment(); buttonFalse()"><i class="fa fa-edit"></i></a><a (dblclick)="showChildModal()"><i class="fa fa-clock-o"></i></a>
+                  <a data-toggle="collapse" data-target="#registry" (dblclick)="getAssignment(); buttonFalse()"><i
+                    class="fa fa-edit"></i></a><a (dblclick)="showChildModal()"><i class="fa fa-clock-o"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
           </div>
           <!-- /.box-body -->
         </div>
-        <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+
+        <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+             aria-labelledby="mySmallModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
               <div class="modal-header">
@@ -86,14 +90,18 @@
               </div>
               <div class="modal-body">
                 <form [formGroup]="changeStatus" style="text-align: center">
-                  <select formControlName="status" style="width: 100%; height: 35px; border-radius: 6px">
+                  <select formControlName="status"
+                          style="width: 100%; height: 35px; border-radius: 6px">
                     <option value="Active">Active</option>
                     <option value="Canceled">Canceled</option>
                     <option value="Done">Done</option>
                   </select>
                   <div style="padding-top: 5%;">
-                  <button (click)="updateStatus(); hideChildModal()" style="text-align: center" type="submit" class="btn btn-success btn-md">
-                    Save</button>
+                    <button (click)="updateStatus(); hideChildModal()" style="text-align: center" type="submit"
+                            data-toggle="collapse" data-target="#bills"
+                            class="btn btn-success btn-md">
+                      Save
+                    </button>
                   </div>
                 </form>
               </div>
@@ -104,7 +112,8 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <a (click)="buttonTrue()" id="new" data-toggle="collapse" data-target="#registry"><i class="fa fa-plus-circle"></i> New Assignment</a>
+        <a (click)="buttonTrue()" id="new" data-toggle="collapse" data-target="#registry"><i
+          class="fa fa-plus-circle"></i> New Assignment</a>
       </div>
     </div>
     <div class="row collapse" id="registry">
@@ -193,17 +202,101 @@
           <div class="form-group last" *ngIf="save">
             <div class="col-md-12" style="text-align: center;">
               <button (click)="submitForm();" type="submit" class="btn btn-success btn-md">
-                Save</button>
+                Save
+              </button>
               <button type="submit" class="btn btn-cancel btn-md">
-                Cancel</button>
+                Cancel
+              </button>
             </div>
           </div>
           <div class="form-group last" *ngIf="!save">
             <div class="col-md-12" style="text-align: center;">
               <button (click)="updateAssignment()" class="btn btn-success btn-md">
-                Edit</button>
+                Edit
+              </button>
               <button type="submit" class="btn btn-cancel btn-md">
-                Cancel</button>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row collapse" id="bills" *ngIf="done">
+      <section class="content-header">
+        <h1>
+          New Bill
+        </h1>
+      </section>
+      <br><br>
+      <div class="col-md-12">
+        <form [formGroup]="billForm" novalidate>
+          <div class="form-group">
+            <label>Bill Number</label>
+            <input type="number" class="form-control" formControlName="bill_number">
+            <!--<small *ngIf="!billForm.controls.bill_number.valid" class="text-danger">-->
+              <!--Number is required.-->
+            <!--</small>-->
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" class="form-control" formControlName="date">
+            <small *ngIf="!billForm.controls.date.valid" class="text-danger">
+              Date is required.
+            </small>
+          </div>
+          <div class="form-group">
+            <label>Client Name</label>
+            <input type="text" class="form-control" formControlName="clientName">
+            <small *ngIf="!billForm.controls.clientName.valid" class="text-danger">
+              Name is required.
+            </small>
+          </div>
+          <div class="form-group">
+            <label>Client Email</label>
+            <input type="text" class="form-control" formControlName="clientEmail">
+            <small *ngIf="!billForm.controls.clientEmail.valid" class="text-danger">
+              Email is required.
+            </small>
+          </div>
+          <!--details-->
+          <div formArrayName="details">
+            <div *ngFor="let address of billForm.controls.details.controls; let i=index" class="panel panel-default">
+              <div class="panel-heading">
+                <span>Detail {{i + 1}}</span>
+                <span class="glyphicon glyphicon-remove pull-right"
+                      *ngIf="billForm.controls.details.controls.length > 1"
+                      (click)="removeDetail(i)"></span>
+              </div>
+              <div class="panel-body" [formGroupName]="i">
+                <div class="form-group col-md-4">
+                  <label>Description</label>
+                  <input type="text" class="form-control" formControlName="description">
+                </div>
+                <div class="form-group col-md-4">
+                  <label>Quantity</label>
+                  <input type="number" class="form-control" formControlName="quantity">
+                </div>
+                <div class="form-group col-md-4">
+                  <label>Unitary cost</label>
+                  <input type="number" class="form-control" formControlName="unitary_cost">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <a id="new" (click)="addDetail()" style="cursor: hand"><i class="fa fa-plus-circle"></i> Add another
+              detail</a>
+          </div>
+          <div class="form-group last">
+            <div class="col-md-12" style="text-align: center;">
+              <button (click)="saveBill()" type="submit" class="btn btn-success btn-md">
+                Save
+              </button>
+              <button type="submit" class="btn btn-cancel btn-md">
+                Cancel
+              </button>
             </div>
           </div>
         </form>

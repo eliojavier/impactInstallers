@@ -3,13 +3,14 @@ import {ModalDirective} from 'ngx-bootstrap/modal';
 import {AssignmentServiceService} from '../assignment-service.service';
 import {UserServiceService} from '../user-service.service';
 import {LocationServiceService} from '../location-service.service';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {BillServiceService} from "../bill-service.service";
 
 @Component({
   selector: 'app-assignments',
   templateUrl: './assignments.component.html',
   styleUrls: ['./assignments.component.css'],
-  providers: [AssignmentServiceService, UserServiceService, LocationServiceService]
+  providers: [AssignmentServiceService, UserServiceService, LocationServiceService, BillServiceService]
 })
 export class AssignmentsComponent implements OnInit {
 
@@ -20,6 +21,7 @@ export class AssignmentsComponent implements OnInit {
   private installers: any;
   private locations: any;
   private save: boolean;
+  private done: boolean;
 
   public assignmentsForm = this.formBuilder.group({
     name: ['', Validators.required],
@@ -35,14 +37,24 @@ export class AssignmentsComponent implements OnInit {
     status: ['', Validators.required],
   });
 
+  public billForm = this.formBuilder.group({
+    clientName: ['', Validators.required],
+    bill_number: ['', [Validators.required, Validators.minLength(1)]],
+    clientEmail: ['', Validators.required],
+    date: ['', Validators.required],
+    details: this.formBuilder.array([
+      this.initDetails(),
+    ])
+  });
+
   constructor(public formBuilder: FormBuilder, private assignmentService: AssignmentServiceService,
-              private userService: UserServiceService, private  locationService: LocationServiceService) {
+              private userService: UserServiceService, private  locationService: LocationServiceService,
+              private billService: BillServiceService) {
   }
 
   ngOnInit() {
     this.getAssignments();
     this.getLocations();
-    this.getUsers();
   }
 
   getAssignments() {
@@ -125,6 +137,22 @@ export class AssignmentsComponent implements OnInit {
 
   updateStatus() {
     console.log(this.selected[0].id);
+    if (this.changeStatus.value.status === 'Done') {
+      this.done = true;
+      this.assignmentService.getAssignment(this.selected[0].id)
+        .subscribe(
+          response => {
+            this.billForm = this.formBuilder.group({
+              bill_number: 0,
+              clientName: response.assignment[0].clientName,
+              clientEmail: response.assignment[0].clientEmail,
+              date: response.assignment[0].date,
+              details: this.formBuilder.array([
+                this.nullDetails(),
+              ])
+            });
+          });
+      }
     this.body = {
       status: this.changeStatus.value.status
     };
@@ -169,6 +197,7 @@ export class AssignmentsComponent implements OnInit {
           );
         });
   }
+
   updateAssignment() {
     console.log(this.assignmentsForm.value);
     this.body = {
@@ -187,6 +216,50 @@ export class AssignmentsComponent implements OnInit {
           console.log(response.status);
           this.assignmentsForm.reset();
           this.getAssignments();
+        },
+        error => this.errorMsg = error
+      );
+  }
+
+  initDetails() {
+    return this.formBuilder.group({
+      description: ['', Validators.required],
+      quantity: ['', Validators.required],
+      unitary_cost: ['', Validators.required],
+    });
+  }
+
+  nullDetails() {
+    return this.formBuilder.group({
+      description: null,
+      quantity: 0,
+      unitary_cost: 0,
+    });
+  }
+
+  addDetail() {
+    const control = <FormArray>this.billForm.controls['details'];
+    control.push(this.initDetails());
+  }
+
+  removeDetail(i: number) {
+    const control = <FormArray>this.billForm.controls['details'];
+    control.removeAt(i);
+  }
+
+  saveBill() {
+    console.log(this.billForm.value);
+    this.body = {
+      bill_number: this.billForm.value.bill_number,
+      details: this.formBuilder.array([
+        this.initDetails(),
+      ])
+    };
+    this.billService.saveBill(this.body)
+      .subscribe(
+        response => {
+          console.log(response.status);
+          this.billForm.reset();
         },
         error => this.errorMsg = error
       );
