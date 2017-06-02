@@ -248,17 +248,15 @@ export class AssignmentsComponent implements OnInit {
   }
 
   saveBill() {
-    console.log(this.billForm.value);
     this.body = {
-      bill_number: this.billForm.value.bill_number,
-      details: this.formBuilder.array([
-        this.initDetails(),
-      ])
+      assignment_id: this.selected[0].id,
+      bill: this.billForm.value
     };
+    console.log(this.body);
     this.billService.saveBill(this.body)
       .subscribe(
         response => {
-          console.log(response.status);
+          console.log(response);
           this.billForm.reset();
         },
         error => this.errorMsg = error
