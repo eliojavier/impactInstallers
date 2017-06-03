@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewContainerRef, ViewEncapsulation , ViewChild} from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { ModalDirective } from 'ngx-bootstrap/modal';
-import { BillServiceService } from '../bill-service.service';
+import {Component, OnInit, ViewContainerRef, ViewEncapsulation, ViewChild} from '@angular/core';
+import {FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
+import {ModalDirective} from 'ngx-bootstrap/modal';
+import {BillServiceService} from '../bill-service.service';
 
 @Component({
   selector: 'app-bills',
@@ -12,7 +12,11 @@ import { BillServiceService } from '../bill-service.service';
 export class BillsComponent implements OnInit {
   public errorMsg: string;
   public billForm: FormGroup;
+  public form: FormGroup;
+  public detailsForm: FormArray;
   private body: any;
+  private details: any;
+  private i: any;
   selected: any[] = [];
   rows = [];
 
@@ -64,16 +68,6 @@ export class BillsComponent implements OnInit {
     control.removeAt(i);
   }
 
-  // save() {
-  //   // call API to save
-  //   // ...
-  //   console.log(this.billForm.value);
-  // }
-  //
-  // onSelect(event) {
-  //   console.log('Event: select', event, this.selected);
-  // }
-
   submitForm() {
     console.log(this.billForm.value);
     this.body = {
@@ -101,5 +95,44 @@ export class BillsComponent implements OnInit {
 
   public hideChildModal(): void {
     this.childModal.hide();
+  }
+
+  getBill() {
+    this.billService.getBill(this.selected[0].id)
+      .subscribe(
+        response => {
+          this.billForm = this.formBuilder.group({
+            details: this.formBuilder.array([])
+          });
+          console.log(response.data);
+          this.billForm = this.formBuilder.group({
+              bill_number: response.data.billNumber,
+              clientName: response.data.clientName,
+              clientEmail: response.data.clientEmail,
+              date: response.data.date,
+              details: this.getDetails(response)
+            },
+            error => this.errorMsg = error
+          )
+          ;
+        });
+  }
+
+  getDetails(response) {
+    this.i = -1;
+    for (const detail in response.data.details.data) {
+      this.i++;
+      console.log(response.data.details.data[this.i]);
+      console.log(this.i);
+       this.form = this.formBuilder.group({
+          description: response.data.details.data[this.i].description,
+          quantity: response.data.details.data[this.i].quantity,
+          unitary_cost: response.data.details.data[this.i].cost,
+        })
+      const control = <FormArray>this.billForm.controls['details'];
+      control.push(this.form);
+    }
+    console.log(this.billForm.controls['details']);
+    return this.billForm.controls['details'];
   }
 }

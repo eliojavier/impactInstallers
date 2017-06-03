@@ -28,7 +28,6 @@
               [rowHeight]="'auto'"
               [selected]="selected"
               [selectionType]="'row'"
-              (select)="onSelect($event)"
               [limit]="10"
               [rows]=rows>
               <ngx-datatable-column name="Bill Number" [flexGrow]="2">
@@ -58,7 +57,9 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="2">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                 <a><i class="fa fa-edit"></i></a><a (click)="showChildModal()"><i class="fa fa-eye"></i></a>
+                 <a data-toggle="collapse" data-target="#registry" (dblclick)="getBill()"><i class="fa fa-edit"></i></a>
+                  <a (click)="showChildModal()"><i class="fa fa-eye"></i></a>
+                  <a><i class="fa fa-file-pdf-o"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
@@ -94,9 +95,6 @@
                   </tr>
                 </table>
               </div>
-              <h4>
-                <b>Tax: </b>
-              </h4>
               <h4><b>Total:</b> {{sel.total}}</h4>
             </div>
           </div>
@@ -104,11 +102,11 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <a id="new" data-toggle="collapse" data-target="#registry"><i class="fa fa-plus-circle"></i> New Bill</a>
-      </div>
-    </div>
+    <!--<div class="row">-->
+      <!--<div class="col-md-12">-->
+        <!--<a id="new" data-toggle="collapse" data-target="#registry"><i class="fa fa-plus-circle"></i> New Bill</a>-->
+      <!--</div>-->
+    <!--</div>-->
     <div class="row collapse" id="registry">
       <section class="content-header">
         <h1>
@@ -129,7 +127,7 @@
             <label>Date</label>
             <input type="date" class="form-control" formControlName="date">
             <small *ngIf="!billForm.controls.date.valid" class="text-danger">
-              Number is required.
+              Date is required.
             </small>
           </div>
           <div class="form-group">
@@ -143,7 +141,7 @@
             <label>Client Email</label>
             <input type="text" class="form-control" formControlName="clientEmail">
             <small *ngIf="!billForm.controls.clientEmail.valid" class="text-danger">
-              Name is required.
+              Email is required.
             </small>
           </div>
           <!--details-->
@@ -177,7 +175,7 @@
           <div class="form-group last">
             <div class="col-md-12" style="text-align: center;">
               <button (click)="submitForm()" type="submit" class="btn btn-success btn-md">
-                Save</button>
+                Edit</button>
               <button type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>
             </div>

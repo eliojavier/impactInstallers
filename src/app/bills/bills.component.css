@@ -54,7 +54,7 @@ th{
   border: solid 1px red;
 }
 
-.fa-trash{
+.fa-file-pdf-o{
   font-size: 20px;
   color:red;
   padding: 5px;
@@ -74,7 +74,7 @@ th{
   margin-top: 1%;
 }
 
-.fa-trash:hover{
+.fa-file-pdf-o:hover{
   color:darkred;
   cursor:pointer;
 }

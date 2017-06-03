@@ -25,6 +25,12 @@ export class BillServiceService {
       .catch(this.errorHandler);
   }
 
+  getBill(id) {
+    return this.http.get(this.baseURI + 'bills/' + id)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
   errorHandler(error: Response) {
     console.log(error);
     return Observable.throw(error || 'server error');
