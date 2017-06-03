@@ -1,7 +1,9 @@
-import {Component, OnInit, ViewContainerRef, ViewEncapsulation, ViewChild} from '@angular/core';
-import {FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
-import {ModalDirective} from 'ngx-bootstrap/modal';
-import {BillServiceService} from '../bill-service.service';
+import { Component, OnInit, ViewContainerRef, ViewEncapsulation , ViewChild} from '@angular/core';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { BillServiceService } from '../bill-service.service';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-bills',
@@ -19,8 +21,13 @@ export class BillsComponent implements OnInit {
   private i: any;
   selected: any[] = [];
   rows = [];
+  auth_token: string;
 
-  constructor(private formBuilder: FormBuilder, private billService: BillServiceService) {
+  constructor(private formBuilder: FormBuilder,
+              private billService: BillServiceService,
+              private router: Router) {
+
+    this.auth_token = (localStorage.getItem('auth_token'));
   }
 
   ngOnInit() {
@@ -32,11 +39,14 @@ export class BillsComponent implements OnInit {
       .subscribe(
         response => {
           if (response) {
-            console.log(response);
             this.rows = response.data;
           }
         },
-        error => this.errorMsg = error,
+        error => {
+          if (error.status === 401) {
+            this.router.navigateByUrl('login');
+          }
+        }
       );
 
     this.billForm = this.formBuilder.group({
@@ -79,11 +89,14 @@ export class BillsComponent implements OnInit {
     this.billService.saveBill(this.body)
       .subscribe(
         response => {
-          console.log(response.status);
           this.billForm.reset();
           this.getBills();
         },
-        error => this.errorMsg = error
+        error => {
+          if (error.status === 401) {
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -128,7 +141,7 @@ export class BillsComponent implements OnInit {
           description: response.data.details.data[this.i].description,
           quantity: response.data.details.data[this.i].quantity,
           unitary_cost: response.data.details.data[this.i].cost,
-        })
+        });
       const control = <FormArray>this.billForm.controls['details'];
       control.push(this.form);
     }

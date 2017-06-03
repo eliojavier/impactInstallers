@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, URLSearchParams, RequestOptions } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -9,18 +9,23 @@ import 'rxjs/add/observable/throw';
 export class BillServiceService {
 
   public baseURI = 'http://localhost:8000/api/';
-  constructor(public http: Http) {
+  auth_token: string;
+  headers : Headers = new Headers();
 
+  constructor(public http: Http) {
+    this.auth_token = (localStorage.getItem('auth_token'));
+    this.headers.append('Accept', 'application/json');
+    this.headers.append('authorization', 'Bearer ' + this.auth_token);
   }
 
   getBills() {
-    return this.http.get(this.baseURI + 'bills')
+    return this.http.get(this.baseURI + 'bills', {headers: this.headers})
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }
 
   saveBill(body) {
-    return this.http.post(this.baseURI + 'bills', body)
+    return this.http.post(this.baseURI + 'bills', body, {headers: this.headers})
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }
@@ -32,7 +37,7 @@ export class BillServiceService {
   }
 
   errorHandler(error: Response) {
-    console.log(error);
+    console.log(error.statusText);
     return Observable.throw(error || 'server error');
   }
 }

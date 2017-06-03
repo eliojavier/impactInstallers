@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ReportsServiceService} from '../reports-service.service';
 import {FormBuilder, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +30,9 @@ export class DashboardComponent implements OnInit {
     year: ['', Validators.required],
   });
 
-  constructor(public formBuilder: FormBuilder, public reportsService: ReportsServiceService) {
+  constructor(public formBuilder: FormBuilder,
+              public reportsService: ReportsServiceService,
+              public router: Router) {
   }
 
   ngOnInit() {
@@ -42,11 +45,14 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         response => {
           if (response) {
-            // console.log(response);
             this.reports = response.markers;
           }
         },
-        error => this.errorMsg = error,
+        error => {
+          if (error.status === 401) {
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -55,11 +61,14 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         response => {
           if (response) {
-            console.log(response);
             this.rows = response.installers;
           }
         },
-        error => this.errorMsg = error,
+        error => {
+          if (error.status === 401) {
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -73,11 +82,14 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         response => {
           if (response) {
-            console.log(response);
             this.commissions = response.commissions;
           }
         },
-        error => this.errorMsg = error,
+        error => {
+          if (error.status === 401) {
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -91,12 +103,15 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         response => {
           if (response) {
-            console.log(response);
             this.doors = response.doors[0].quantity;
             this.windows = response.windows[0].quantity;
           }
         },
-        error => this.errorMsg = error,
+        error => {
+          if (error.status === 401) {
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 }

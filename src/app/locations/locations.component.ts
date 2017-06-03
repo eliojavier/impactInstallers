@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocationServiceService} from '../location-service.service';
 import {FormBuilder, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-locations',
@@ -25,7 +26,9 @@ export class LocationsComponent implements OnInit {
     long: ['', Validators.required],
   });
 
-  constructor(public formBuilder: FormBuilder, private locationService: LocationServiceService) {
+  constructor(public formBuilder: FormBuilder,
+              private locationService: LocationServiceService,
+              public router: Router) {
   }
 
   ngOnInit() {
@@ -37,11 +40,14 @@ export class LocationsComponent implements OnInit {
       .subscribe(
         response => {
           if (response) {
-            console.log(response);
             this.rows = response.locations;
           }
         },
-        error => this.errorMsg = error,
+        error => {
+          if (error.status === 401) {
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -59,11 +65,14 @@ export class LocationsComponent implements OnInit {
     this.locationService.saveLocation(this.body)
       .subscribe(
         response => {
-          console.log(response.status);
           this.locationsForm.reset();
           this.getLocations();
         },
-        error => this.errorMsg = error
+        error => {
+          if (error.status === 401) {
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -75,7 +84,11 @@ export class LocationsComponent implements OnInit {
           this.locationsForm.reset();
           this.getLocations();
         },
-        error => this.errorMsg = error
+        error => {
+          if (error.status === 401) {
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -83,7 +96,6 @@ export class LocationsComponent implements OnInit {
     this.locationService.getLocation(this.selected[0].id)
       .subscribe(
         response => {
-          console.log('locationssss' + response);
           this.locationsForm = this.formBuilder.group({
               name: response.name,
               state: response.state,
@@ -93,7 +105,11 @@ export class LocationsComponent implements OnInit {
               long: response.lon,
 
             },
-            error => this.errorMsg = error
+            error => {
+              if (error.status === 401) {
+                this.router.navigateByUrl('login');
+              }
+            }
           );
         });
   }
@@ -122,11 +138,14 @@ export class LocationsComponent implements OnInit {
     this.locationService.updateLocation(this.selected[0].id, this.body)
       .subscribe(
         response => {
-          console.log(response.status);
           this.locationsForm.reset();
           this.getLocations();
         },
-        error => this.errorMsg = error
+        error => {
+          if (error.status === 401) {
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 }
