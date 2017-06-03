@@ -7,6 +7,7 @@ import { LocationsComponent } from '../locations/locations.component';
 import { BillsComponent } from '../bills/bills.component';
 import { AssignmentsComponent } from '../assignments/assignments.component';
 import { ProfileComponent } from '../profile/profile.component';
+import { LoginComponent } from '../login/login.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,10 @@ import { ProfileComponent } from '../profile/profile.component';
           {
             path: 'profile',
             component: ProfileComponent
+          },
+          {
+            path: 'login',
+            component: LoginComponent
           }
         ]
      }

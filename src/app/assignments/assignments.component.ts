@@ -3,7 +3,8 @@ import {ModalDirective} from 'ngx-bootstrap/modal';
 import {AssignmentServiceService} from '../assignment-service.service';
 import {UserServiceService} from '../user-service.service';
 import {LocationServiceService} from '../location-service.service';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, Validators} from '@angular/forms';
+import {Router} from "@angular/router";
 import {BillServiceService} from "../bill-service.service";
 
 @Component({
@@ -12,6 +13,7 @@ import {BillServiceService} from "../bill-service.service";
   styleUrls: ['./assignments.component.css'],
   providers: [AssignmentServiceService, UserServiceService, LocationServiceService, BillServiceService]
 })
+
 export class AssignmentsComponent implements OnInit {
 
   public errorMsg: string;
@@ -22,6 +24,7 @@ export class AssignmentsComponent implements OnInit {
   private locations: any;
   private save: boolean;
   private done: boolean;
+  auth_token: string;
 
   public assignmentsForm = this.formBuilder.group({
     name: ['', Validators.required],
@@ -47,9 +50,13 @@ export class AssignmentsComponent implements OnInit {
     ])
   });
 
-  constructor(public formBuilder: FormBuilder, private assignmentService: AssignmentServiceService,
-              private userService: UserServiceService, private  locationService: LocationServiceService,
+  constructor(public formBuilder: FormBuilder,
+              private router: Router,
+              private assignmentService: AssignmentServiceService,
+              private userService: UserServiceService,
+              private  locationService: LocationServiceService,
               private billService: BillServiceService) {
+
   }
 
   ngOnInit() {
@@ -58,7 +65,7 @@ export class AssignmentsComponent implements OnInit {
   }
 
   getAssignments() {
-    this.assignmentService.getAssignments()
+    return this.assignmentService.getAssignments()
       .subscribe(
         response => {
           if (response) {
@@ -66,7 +73,11 @@ export class AssignmentsComponent implements OnInit {
             this.rows = response.assignments;
           }
         },
-        error => this.errorMsg = error,
+        error => {
+          if(error.status == 401){
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -85,7 +96,12 @@ export class AssignmentsComponent implements OnInit {
             this.installers = response.data;
           }
         },
-        error => this.errorMsg = error,
+        error => {
+          if(error.status == 401){
+            console.log('inside if');
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -98,7 +114,12 @@ export class AssignmentsComponent implements OnInit {
             this.locations = response.locations;
           }
         },
-        error => this.errorMsg = error,
+        error => {
+          if(error.status == 401){
+            console.log('inside if');
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -121,7 +142,12 @@ export class AssignmentsComponent implements OnInit {
           this.assignmentsForm.reset();
           this.getAssignments();
         },
-        error => this.errorMsg = error
+        error => {
+          if(error.status == 401){
+            console.log('inside if');
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -164,7 +190,12 @@ export class AssignmentsComponent implements OnInit {
           this.assignmentsForm.reset();
           this.getAssignments();
         },
-        error => this.errorMsg = error
+        error => {
+          if(error.status == 401){
+            console.log('inside if');
+            this.router.navigateByUrl('login');
+          }
+        }
       );
 
   }
@@ -193,7 +224,12 @@ export class AssignmentsComponent implements OnInit {
               location: response.assignment[0].location,
               address: response.assignment[0].address,
             },
-            error => this.errorMsg = error
+            error => {
+              if(error.status == 401){
+                console.log('inside if');
+                this.router.navigateByUrl('login');
+              }
+            }
           );
         });
   }
@@ -217,7 +253,12 @@ export class AssignmentsComponent implements OnInit {
           this.assignmentsForm.reset();
           this.getAssignments();
         },
-        error => this.errorMsg = error
+        error => {
+          if(error.status == 401){
+            console.log('inside if');
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -259,7 +300,12 @@ export class AssignmentsComponent implements OnInit {
           console.log(response);
           this.billForm.reset();
         },
-        error => this.errorMsg = error
+        error => {
+          if(error.status == 401){
+            console.log('inside if');
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 }

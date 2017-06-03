@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {UserServiceService} from '../user-service.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -25,7 +26,10 @@ export class ProfileComponent implements OnInit {
     confirm_password: ['', [Validators.required]]
   });
 
-  constructor(public formBuilder: FormBuilder,  private userService: UserServiceService) { }
+  constructor(public formBuilder: FormBuilder,
+              private userService: UserServiceService,
+              public router: Router) {
+  }
 
   ngOnInit() {
   }
@@ -34,7 +38,6 @@ export class ProfileComponent implements OnInit {
     this.userService.getUser(this.id)
       .subscribe(
         response => {
-          console.log(response.data);
           this.registerForm = this.formBuilder.group({
               first_name: response.data.name,
               last_name: response.data.lastName,
@@ -44,13 +47,16 @@ export class ProfileComponent implements OnInit {
               phone: response.data.phone,
               password: response.data.password
             },
-            error => this.errorMsg = error
+            error => {
+              if (error.status == 401) {
+                this.router.navigateByUrl('login');
+              }
+            }
           );
         });
   }
 
   submitForm() {
-    console.log(this.registerForm.value);
     this.body = {
       name: this.registerForm.value.first_name,
       last_name: this.registerForm.value.last_name,
@@ -67,7 +73,11 @@ export class ProfileComponent implements OnInit {
           console.log(response.status);
           this.registerForm.reset();
         },
-        error => this.errorMsg = error
+        error => {
+          if (error.status == 401) {
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 

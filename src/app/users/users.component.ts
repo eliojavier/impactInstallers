@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Validators, FormBuilder} from '@angular/forms';
 import {UserServiceService} from '../user-service.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-users',
@@ -25,7 +26,9 @@ export class UsersComponent implements OnInit {
     address: ['', [Validators.required]],
   });
 
-  constructor(public formBuilder: FormBuilder, private userService: UserServiceService) {
+  constructor(public formBuilder: FormBuilder,
+              private userService: UserServiceService,
+              public router: Router) {
   }
 
   ngOnInit() {
@@ -37,11 +40,14 @@ export class UsersComponent implements OnInit {
       .subscribe(
         response => {
           if (response) {
-            console.log(response);
             this.rows = response.data;
           }
         },
-        error => this.errorMsg = error,
+        error => {
+          if(error.status == 401){
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -58,11 +64,14 @@ export class UsersComponent implements OnInit {
     this.userService.saveUser(this.body)
       .subscribe(
         response => {
-          console.log(response.status);
           this.registerForm.reset();
           this.getUsers();
         },
-        error => this.errorMsg = error
+        error => {
+          if(error.status == 401){
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -71,10 +80,13 @@ export class UsersComponent implements OnInit {
     this.userService.deleteUser(this.selected[0].id)
       .subscribe(
         response => {
-          console.log(response.status);
           this.getUsers();
         },
-        error => this.errorMsg = error
+        error => {
+          if(error.status == 401){
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -82,7 +94,6 @@ export class UsersComponent implements OnInit {
     this.userService.getUser(this.selected[0].id)
       .subscribe(
         response => {
-          console.log(response.data);
           this.registerForm = this.formBuilder.group({
               first_name: response.data.name,
               last_name: response.data.lastName,
@@ -91,7 +102,11 @@ export class UsersComponent implements OnInit {
               address: response.data.address,
               phone: response.data.phone,
             },
-            error => this.errorMsg = error
+            error => {
+              if(error.status == 401){
+                this.router.navigateByUrl('login');
+              }
+            }
           );
         });
   }
@@ -100,9 +115,12 @@ export class UsersComponent implements OnInit {
     this.userService.resetPassword(this.selected[0].id)
       .subscribe(
         response => {
-          console.log(response.status);
         },
-        error => this.errorMsg = error
+        error => {
+          if(error.status == 401){
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 
@@ -129,11 +147,14 @@ export class UsersComponent implements OnInit {
     this.userService.updateUser(this.selected[0].id, this.body)
       .subscribe(
         response => {
-          console.log(response.status);
           this.registerForm.reset();
           this.getUsers();
         },
-        error => this.errorMsg = error
+        error => {
+          if(error.status == 401){
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 }
