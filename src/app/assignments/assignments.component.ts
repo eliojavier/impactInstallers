@@ -24,6 +24,7 @@ export class AssignmentsComponent implements OnInit {
   private locations: any;
   private save: boolean;
   private done: boolean;
+  private statusDone: boolean;
   auth_token: string;
 
   public assignmentsForm = this.formBuilder.group({
@@ -71,6 +72,10 @@ export class AssignmentsComponent implements OnInit {
           if (response) {
             console.log(response);
             this.rows = response.assignments;
+            console.log(this.rows[0].status);
+            // if (response.assignments.status === 'Done') {
+            //   this.statusDone = true;
+            // }
           }
         },
         error => {

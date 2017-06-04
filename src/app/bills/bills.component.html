@@ -55,11 +55,15 @@
                   {{value}}
                 </ng-template>
               </ngx-datatable-column>
+              <ngx-datatable-column name="PDF" [flexGrow]="1">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  <a href="{{value}}"><i class="fa fa-file-pdf-o"></i></a>
+                </ng-template>
+              </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="2">
                 <ng-template let-value="value" ngx-datatable-cell-template>
                  <a data-toggle="collapse" data-target="#registry" (dblclick)="getBill()"><i class="fa fa-edit"></i></a>
                   <a (click)="showChildModal()"><i class="fa fa-eye"></i></a>
-                  <a (dblclick)="showPdf()"><i class="fa fa-file-pdf-o"></i></a>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
