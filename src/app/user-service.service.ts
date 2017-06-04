@@ -63,6 +63,12 @@ export class UserServiceService {
       .catch(this.errorHandler);
   }
 
+  getUserByToken() {
+    return this.http.get(this.baseURI + 'users/token', {headers: this.headers})
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
   errorHandler(error: Response) {
     console.log(error);
     return Observable.throw(error || 'server error');

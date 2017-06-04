@@ -42,6 +42,12 @@ export class BillServiceService {
       .catch(this.errorHandler);
   }
 
+  updateBill(id, body) {
+    return this.http.put(this.baseURI + 'bills/' + id, body, {headers: this.headers})
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
   errorHandler(error: Response) {
     console.log(error.statusText);
     return Observable.throw(error || 'server error');

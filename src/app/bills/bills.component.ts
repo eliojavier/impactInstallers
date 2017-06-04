@@ -145,7 +145,6 @@ export class BillsComponent implements OnInit {
       const control = <FormArray>this.billForm.controls['details'];
       control.push(this.form);
     }
-    console.log(this.billForm.controls['details']);
     return this.billForm.controls['details'];
   }
 
@@ -156,6 +155,30 @@ export class BillsComponent implements OnInit {
           console.log(response);
         },
         error => this.errorMsg = error
+      );
+  }
+
+  updateBill() {
+    this.body = {
+      bill_number: this.billForm.value.bill_number,
+      details: this.formBuilder.array([
+        this.initDetails(),
+      ])
+    };
+
+    this.billService.updateBill(this.selected[0].id, this.body)
+      .subscribe(
+        response => {
+          console.log(response.status);
+          this.billForm.reset();
+          this.getBills();
+        },
+        error => {
+          if (error.status === 401) {
+            console.log('inside if');
+            this.router.navigateByUrl('login');
+          }
+        }
       );
   }
 }

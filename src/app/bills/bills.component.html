@@ -119,7 +119,7 @@
       </section>
       <br><br>
       <div class="col-md-12">
-        <form [formGroup]="billForm" novalidate (ngSubmit)="save(billForm)">
+        <form [formGroup]="billForm" novalidate>
           <div class="form-group">
             <label>Bill Number</label>
             <input type="number" class="form-control" formControlName="bill_number">
@@ -178,7 +178,7 @@
           </div>
           <div class="form-group last">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="submitForm()" type="submit" class="btn btn-success btn-md">
+              <button (click)="updateBill()" type="submit" class="btn btn-success btn-md">
                 Edit</button>
               <button type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>

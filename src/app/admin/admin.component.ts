@@ -11,6 +11,8 @@ import {Router} from '@angular/router';
 export class AdminComponent implements OnInit {
 
   private userName: any;
+  private role: any;
+  private supervisor: boolean;
 
   auth_token: string;
 
@@ -19,14 +21,23 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getUserByToken();
   }
 
-  getUser() {
-    this.userService.getUser(this.auth_token)
+  getUserByToken() {
+    this.userService.getUserByToken()
       .subscribe(
         response => {
           if (response) {
-            this.userName = response.name;
+            this.userName = response.data.name + ' ' + response.data.lastName;
+            this.role = response.data.role;
+            console.log(this.role);
+            if (this.role === 'Supervisor') {
+              this.supervisor = true;
+            }
+            if (this.role === 'Employee') {
+              this.supervisor = false;
+            }
           }
         },
         error => {
@@ -35,6 +46,11 @@ export class AdminComponent implements OnInit {
           }
         }
       );
+  }
+
+  logout() {
+    localStorage.removeItem('auth_token');
+    this.router.navigateByUrl('login');
   }
 
 }

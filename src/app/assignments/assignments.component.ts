@@ -23,6 +23,8 @@ export class AssignmentsComponent implements OnInit {
   private installers: any;
   private locations: any;
   private save: boolean;
+  private supervisor: boolean;
+  private role: any;
   private done: boolean;
   private statusDone: boolean;
   auth_token: string;
@@ -308,6 +310,29 @@ export class AssignmentsComponent implements OnInit {
         error => {
           if (error.status === 401) {
             console.log('inside if');
+            this.router.navigateByUrl('login');
+          }
+        }
+      );
+  }
+
+  getUserByToken() {
+    this.userService.getUserByToken()
+      .subscribe(
+        response => {
+          if (response) {
+            this.role = response.data.role;
+            console.log(this.role);
+            if (this.role === 'Supervisor') {
+              this.supervisor = true;
+            }
+            if (this.role === 'Employee') {
+              this.supervisor = false;
+            }
+          }
+        },
+        error => {
+          if (error.status === 401) {
             this.router.navigateByUrl('login');
           }
         }

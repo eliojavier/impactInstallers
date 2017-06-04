@@ -91,25 +91,25 @@ export class UsersComponent implements OnInit {
   }
 
   getUser() {
-    this.userService.getUser(this.selected[0].id)
-      .subscribe(
-        response => {
-          this.registerForm = this.formBuilder.group({
-              first_name: response.data.name,
-              last_name: response.data.lastName,
-              doc_id: response.data.documentId,
-              email: response.data.email,
-              address: response.data.address,
-              phone: response.data.phone,
-            },
-            error => {
-              if (error.status === 401) {
-                this.router.navigateByUrl('login');
-              }
+  this.userService.getUser(this.selected[0].id)
+    .subscribe(
+      response => {
+        this.registerForm = this.formBuilder.group({
+            first_name: response.data.name,
+            last_name: response.data.lastName,
+            doc_id: response.data.documentId,
+            email: response.data.email,
+            address: response.data.address,
+            phone: response.data.phone,
+          },
+          error => {
+            if (error.status === 401) {
+              this.router.navigateByUrl('login');
             }
-          );
-        });
-  }
+          }
+        );
+      });
+}
 
   resetPassword() {
     this.userService.resetPassword(this.selected[0].id)
