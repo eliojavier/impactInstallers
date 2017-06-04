@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewContainerRef, ViewEncapsulation , ViewChild} from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { ModalDirective } from 'ngx-bootstrap/modal';
-import { BillServiceService } from '../bill-service.service';
+import {Component, OnInit, ViewContainerRef, ViewEncapsulation, ViewChild} from '@angular/core';
+import {FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
+import {ModalDirective} from 'ngx-bootstrap/modal';
+import {BillServiceService} from '../bill-service.service';
 import {Router} from '@angular/router';
 
 
@@ -137,15 +137,25 @@ export class BillsComponent implements OnInit {
       this.i++;
       console.log(response.data.details.data[this.i]);
       console.log(this.i);
-       this.form = this.formBuilder.group({
-          description: response.data.details.data[this.i].description,
-          quantity: response.data.details.data[this.i].quantity,
-          unitary_cost: response.data.details.data[this.i].cost,
-        });
+      this.form = this.formBuilder.group({
+        description: response.data.details.data[this.i].description,
+        quantity: response.data.details.data[this.i].quantity,
+        unitary_cost: response.data.details.data[this.i].cost,
+      });
       const control = <FormArray>this.billForm.controls['details'];
       control.push(this.form);
     }
     console.log(this.billForm.controls['details']);
     return this.billForm.controls['details'];
+  }
+
+  showPdf() {
+    this.billService.showPdf(this.selected[0].id)
+      .subscribe(
+        response => {
+          console.log(response);
+        },
+        error => this.errorMsg = error
+      );
   }
 }

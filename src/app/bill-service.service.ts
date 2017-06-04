@@ -31,7 +31,13 @@ export class BillServiceService {
   }
 
   getBill(id) {
-    return this.http.get(this.baseURI + 'bills/' + id)
+    return this.http.get(this.baseURI + 'bills/' + id,  {headers: this.headers})
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  showPdf(id) {
+    return this.http.get(this.baseURI + 'bills/showPdf/' + id,  {headers: this.headers})
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }

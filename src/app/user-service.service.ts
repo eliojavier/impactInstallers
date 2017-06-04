@@ -32,7 +32,7 @@ export class UserServiceService {
 
   resetPassword(id) {
     this.body = {
-      password: '12345',
+      password: '123456',
     };
     return this.http.put(this.baseURI + 'users/password/' + id, this.body, {headers: this.headers})
       .map((response: Response) => response.json())

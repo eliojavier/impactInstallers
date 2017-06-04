@@ -298,7 +298,7 @@ export class AssignmentsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.billForm.reset();
+          this.router.navigateByUrl('admin/bills');
         },
         error => {
           if (error.status === 401) {
