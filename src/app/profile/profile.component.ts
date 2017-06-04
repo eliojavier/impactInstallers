@@ -86,5 +86,8 @@ export class ProfileComponent implements OnInit {
       );
   }
 
+  cancelButton() {
+    this.router.navigateByUrl('admin');
+  }
 
 }

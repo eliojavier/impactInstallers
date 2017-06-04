@@ -115,6 +115,7 @@ export class UsersComponent implements OnInit {
     this.userService.resetPassword(this.selected[0].id)
       .subscribe(
         response => {
+          console.log('password');
         },
         error => {
           if (error.status === 401) {
@@ -156,5 +157,9 @@ export class UsersComponent implements OnInit {
           }
         }
       );
+  }
+
+  cancelButton() {
+    this.registerForm.reset();
   }
 }

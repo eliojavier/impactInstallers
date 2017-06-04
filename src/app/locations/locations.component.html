@@ -147,7 +147,7 @@
           <!--</div>-->
           <div class="form-group last" *ngIf="save">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="submitForm()" class="btn btn-success btn-md">
+              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" (click)="submitForm()" class="btn btn-success btn-md">
                 Save</button>
               <button type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>
@@ -158,7 +158,7 @@
             <div class="col-md-12" style="text-align: center;">
               <button (click)="updateLocation()" class="btn btn-success btn-md">
                 Edit</button>
-              <button type="submit" class="btn btn-cancel btn-md">
+              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>
             </div>
           </div>

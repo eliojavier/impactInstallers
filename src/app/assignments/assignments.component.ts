@@ -65,6 +65,7 @@ export class AssignmentsComponent implements OnInit {
   ngOnInit() {
     this.getAssignments();
     this.getLocations();
+    this.getUserByToken();
   }
 
   getAssignments() {
@@ -330,6 +331,7 @@ export class AssignmentsComponent implements OnInit {
               this.supervisor = false;
             }
           }
+          console.log('roleee ' + this.supervisor);
         },
         error => {
           if (error.status === 401) {
@@ -337,6 +339,11 @@ export class AssignmentsComponent implements OnInit {
           }
         }
       );
+  }
+
+  cancelButton() {
+    this.assignmentsForm.reset();
+    this.billForm.reset();
   }
 }
 

@@ -156,7 +156,7 @@
             <div class="col-md-12" style="text-align: center;">
               <button (click)="submitForm()" class="btn btn-success btn-md">
                 Save</button>
-              <button type="submit" class="btn btn-cancel btn-md">
+              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>
             </div>
           </div>
@@ -165,7 +165,7 @@
             <div class="col-md-12" style="text-align: center;">
               <button (click)="updateUser()" class="btn btn-success btn-md">
                 Edit</button>
-              <button type="submit" class="btn btn-cancel btn-md">
+              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>
             </div>
           </div>

@@ -148,4 +148,8 @@ export class LocationsComponent implements OnInit {
         }
       );
   }
+
+  cancelButton() {
+    this.locationsForm.reset();
+  }
 }
