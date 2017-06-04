@@ -22,8 +22,8 @@ export class ProfileComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     phone: ['', Validators.required],
     address: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-    confirm_password: ['', [Validators.required]]
+    password: [''],
+    confirm_password: ['']
   });
 
   constructor(public formBuilder: FormBuilder,
@@ -32,12 +32,15 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getUserByToken();
   }
 
-  getUser() {
-    this.userService.getUser(this.id)
+  getUserByToken() {
+    this.userService.getUserByToken()
       .subscribe(
         response => {
+          this.id = response.data.id;
+          console.log('getuser ' + this.id);
           this.registerForm = this.formBuilder.group({
               first_name: response.data.name,
               last_name: response.data.lastName,
@@ -45,7 +48,8 @@ export class ProfileComponent implements OnInit {
               email: response.data.email,
               address: response.data.address,
               phone: response.data.phone,
-              password: response.data.password
+              password: response.data.password,
+              confirm_password: response.data.password,
             },
             error => {
               if (error.status === 401) {
@@ -57,6 +61,7 @@ export class ProfileComponent implements OnInit {
   }
 
   submitForm() {
+    console.log('submit ' + this.id);
     this.body = {
       name: this.registerForm.value.first_name,
       last_name: this.registerForm.value.last_name,
@@ -71,7 +76,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response.status);
-          this.registerForm.reset();
+          this.router.navigateByUrl('admin/dashboard');
         },
         error => {
           if (error.status === 401) {
