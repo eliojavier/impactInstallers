@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import{LoginServiceService} from '../login-service.service';
-import {Router} from "@angular/router";
+import {LoginServiceService} from '../login-service.service';
+import {Router} from '@angular/router';
+import {ModalDirective} from 'ngx-bootstrap';
 
 
 @Component({
@@ -32,8 +33,8 @@ export class LoginComponent implements OnInit {
   login() {
     this.body = {
       client_id: 2,
-      client_secret: "8JVwpW1xXUsGDy2mesPL8cQihDHQpmVsXRGRHUhx",
-      grant_type: "password",
+      client_secret: '8JVwpW1xXUsGDy2mesPL8cQihDHQpmVsXRGRHUhx',
+      grant_type: 'password',
       username: this.loginForm.value.email,
       password: this.loginForm.value.password,
     };
@@ -47,8 +48,22 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl('admin/dashboard');
           }
         },
-        error => this.errorMsg = error,
+        error => {
+          // if (error.status === 500) {
+          //   this.showErrorModal();
+          // }
+        },
       );
   }
+
+  // @ViewChild('errorModal') public errorModal: ModalDirective;
+  //
+  // public showErrorModal(): void {
+  //   this.errorModal.show();
+  // }
+  //
+  // public hideErrorModal(): void {
+  //   this.errorModal.hide();
+  // }
 
 }

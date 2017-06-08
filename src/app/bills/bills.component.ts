@@ -46,6 +46,9 @@ export class BillsComponent implements OnInit {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
           }
+          if (error.status === 500) {
+            this.showErrorModal();
+          }
         }
       );
 
@@ -89,12 +92,16 @@ export class BillsComponent implements OnInit {
     this.billService.saveBill(this.body)
       .subscribe(
         response => {
+          this.showSuccessfulModal();
           this.billForm.reset();
           this.getBills();
         },
         error => {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
+          }
+          if (error.status === 500) {
+            this.showErrorModal();
           }
         }
       );
@@ -125,9 +132,12 @@ export class BillsComponent implements OnInit {
               date: response.data.date,
               details: this.getDetails(response)
             },
-            error => this.errorMsg = error
-          )
-          ;
+            error => {
+              if (error.status === 500) {
+                this.showErrorModal();
+              }
+            }
+          );
         });
   }
 
@@ -160,15 +170,17 @@ export class BillsComponent implements OnInit {
 
   updateBill() {
     this.body = {
-      bill_number: this.billForm.value.bill_number,
-      details: this.formBuilder.array([
-        this.initDetails(),
-      ])
+      // bill_number: this.billForm.value.bill_number,
+      // details: this.formBuilder.array([
+      //   this.initDetails(),
+      // ])
+      bill: this.billForm.value
     };
 
     this.billService.updateBill(this.selected[0].id, this.body)
       .subscribe(
         response => {
+          this.showSuccessfulModal();
           console.log(response.status);
           this.billForm.reset();
           this.getBills();
@@ -178,7 +190,30 @@ export class BillsComponent implements OnInit {
             console.log('inside if');
             this.router.navigateByUrl('login');
           }
+          if (error.status === 500) {
+            this.showErrorModal();
+          }
         }
       );
+  }
+
+  @ViewChild('errorModal') public errorModal: ModalDirective;
+
+  public showErrorModal(): void {
+    this.errorModal.show();
+  }
+
+  public hideErrorModal(): void {
+    this.errorModal.hide();
+  }
+
+  @ViewChild('successfulModal') public successfulModal: ModalDirective;
+
+  public showSuccessfulModal(): void {
+    this.successfulModal.show();
+  }
+
+  public hideSuccessfulModal(): void {
+    this.successfulModal.hide();
   }
 }

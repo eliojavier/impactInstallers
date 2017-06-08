@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Validators, FormBuilder} from '@angular/forms';
 import {UserServiceService} from '../user-service.service';
 import {Router} from '@angular/router';
+import {ModalDirective} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-users',
@@ -47,6 +48,9 @@ export class UsersComponent implements OnInit {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
           }
+          if (error.status === 500) {
+            this.showChildModal();
+          }
         }
       );
   }
@@ -64,12 +68,20 @@ export class UsersComponent implements OnInit {
     this.userService.saveUser(this.body)
       .subscribe(
         response => {
+          this.showSuccessfulModal();
           this.registerForm.reset();
           this.getUsers();
         },
         error => {
           if (error.status === 401) {
+            this.showChildModal();
             this.router.navigateByUrl('login');
+          }
+          if (error.status === 400) {
+            this.showEmailModal();
+          }
+          if (error.status === 500) {
+            this.showChildModal();
           }
         }
       );
@@ -80,46 +92,56 @@ export class UsersComponent implements OnInit {
     this.userService.deleteUser(this.selected[0].id)
       .subscribe(
         response => {
+          this.showSuccessfulModal();
           this.getUsers();
         },
         error => {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
           }
+          if (error.status === 500) {
+            this.showChildModal();
+          }
         }
       );
   }
 
   getUser() {
-  this.userService.getUser(this.selected[0].id)
-    .subscribe(
-      response => {
-        this.registerForm = this.formBuilder.group({
-            first_name: response.data.name,
-            last_name: response.data.lastName,
-            doc_id: response.data.documentId,
-            email: response.data.email,
-            address: response.data.address,
-            phone: response.data.phone,
-          },
-          error => {
-            if (error.status === 401) {
-              this.router.navigateByUrl('login');
+    this.userService.getUser(this.selected[0].id)
+      .subscribe(
+        response => {
+          this.registerForm = this.formBuilder.group({
+              first_name: response.data.name,
+              last_name: response.data.lastName,
+              doc_id: response.data.documentId,
+              email: response.data.email,
+              address: response.data.address,
+              phone: response.data.phone,
+            },
+            error => {
+              if (error.status === 401) {
+                this.router.navigateByUrl('login');
+              }
+              if (error.status === 500) {
+                this.showChildModal();
+              }
             }
-          }
-        );
-      });
-}
+          );
+        });
+  }
 
   resetPassword() {
     this.userService.resetPassword(this.selected[0].id)
       .subscribe(
         response => {
-          console.log('password');
+          this.showSuccessfulModal();
         },
         error => {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
+          }
+          if (error.status === 500) {
+            this.showChildModal();
           }
         }
       );
@@ -148,6 +170,7 @@ export class UsersComponent implements OnInit {
     this.userService.updateUser(this.selected[0].id, this.body)
       .subscribe(
         response => {
+          this.showSuccessfulModal();
           this.registerForm.reset();
           this.getUsers();
         },
@@ -155,11 +178,47 @@ export class UsersComponent implements OnInit {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
           }
+          if (error.status === 400) {
+            this.showEmailModal();
+          }
+          if (error.status === 500) {
+            this.showChildModal();
+          }
         }
       );
   }
 
   cancelButton() {
     this.registerForm.reset();
+  }
+
+  @ViewChild('childModal') public childModal: ModalDirective;
+
+  public showChildModal(): void {
+    this.childModal.show();
+  }
+
+  public hideChildModal(): void {
+    this.childModal.hide();
+  }
+
+  @ViewChild('emailModal') public emailModal: ModalDirective;
+
+  public showEmailModal(): void {
+    this.emailModal.show();
+  }
+
+  public hideEmailModal(): void {
+    this.emailModal.hide();
+  }
+
+  @ViewChild('successfulModal') public successfulModal: ModalDirective;
+
+  public showSuccessfulModal(): void {
+    this.successfulModal.show();
+  }
+
+  public hideSuccessfulModal(): void {
+    this.successfulModal.hide();
   }
 }

@@ -119,6 +119,38 @@
         </div>
       </div>
     </div>
+
+    <div bsModal #errorModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left"><i style="color:red; font-size: 20px" class="fa fa-exclamation-triangle"></i>Oops! Something went wrong.</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="hideErrorModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Something went wrong! Please try again.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div bsModal #successfulModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left"><i style="color:green; font-size: 20px" class="fa fa-exclamation-triangle"></i> Great!</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="hideSuccessfulModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>The action was successful.</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-12" *ngIf="supervisor">
         <a (click)="buttonTrue()" id="new" data-toggle="collapse" data-target="#registry"><i
@@ -179,7 +211,8 @@
               Location</label>
             <div class="col-md-4">
               <select type="text" class="form-control" formControlName="location" required>
-                <option *ngFor="let x of locations" [value]="x.id" [selected]="x.id">{{x.name}}</option>
+                <!--<option *ngFor="let x of locations" [value]="x.id" [selected]="x.id">{{x.name}}</option>-->
+                <option *ngFor="let x of locations" [value]="x.id" [selected]="x.name == selected_location ? true: null">{{x.name}}</option>
               </select>
               <small *ngIf="!assignmentsForm.controls.location.valid" class="text-danger">
                 Location is required.
@@ -200,8 +233,8 @@
             <label class="col-md-2 col-md-offset-2 control-label">
               Installer</label>
             <div class="col-md-4">
-              <select (focus)="getUsers()" type="text" class="form-control" formControlName="name" required>
-                <option *ngFor="let x of installers" [value]="x.id" [selected]="x.id">{{x.name}}</option>
+              <select (focus)="getUsers()" class="form-control" formControlName="name" required>
+                <option *ngFor="let x of installers" [value]="x.id" [selected]="x.name == selected_installer ? true: null">{{x.name}}</option>
               </select>
               <small *ngIf="!assignmentsForm.controls.name.valid" class="text-danger">
                 Installer is required.

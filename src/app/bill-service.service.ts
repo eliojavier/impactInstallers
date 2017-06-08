@@ -43,13 +43,14 @@ export class BillServiceService {
   }
 
   updateBill(id, body) {
-    return this.http.put(this.baseURI + 'bills/' + id, body, {headers: this.headers})
+    console.log('body' + body + 'id' + id);
+    return this.http.patch(this.baseURI + 'bills/' + id, body, {headers: this.headers})
       .map((response: Response) => response.json())
       .catch(this.errorHandler);
   }
 
   errorHandler(error: Response) {
-    console.log(error.statusText);
+    console.log(error);
     return Observable.throw(error || 'server error');
   }
 }

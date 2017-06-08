@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {LocationServiceService} from '../location-service.service';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {ModalDirective} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-locations',
@@ -47,6 +48,9 @@ export class LocationsComponent implements OnInit {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
           }
+          if (error.status === 500) {
+            this.showChildModal();
+          }
         }
       );
   }
@@ -65,12 +69,16 @@ export class LocationsComponent implements OnInit {
     this.locationService.saveLocation(this.body)
       .subscribe(
         response => {
+          this.showSuccessfulModal();
           this.locationsForm.reset();
           this.getLocations();
         },
         error => {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
+          }
+          if (error.status === 500) {
+            this.showChildModal();
           }
         }
       );
@@ -81,12 +89,16 @@ export class LocationsComponent implements OnInit {
     this.locationService.deleteLocation(this.selected[0].id)
       .subscribe(
         response => {
+          this.showSuccessfulModal();
           this.locationsForm.reset();
           this.getLocations();
         },
         error => {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
+          }
+          if (error.status === 500) {
+            this.showChildModal();
           }
         }
       );
@@ -108,6 +120,9 @@ export class LocationsComponent implements OnInit {
             error => {
               if (error.status === 401) {
                 this.router.navigateByUrl('login');
+              }
+              if (error.status === 500) {
+                this.showChildModal();
               }
             }
           );
@@ -138,6 +153,7 @@ export class LocationsComponent implements OnInit {
     this.locationService.updateLocation(this.selected[0].id, this.body)
       .subscribe(
         response => {
+          this.showSuccessfulModal();
           this.locationsForm.reset();
           this.getLocations();
         },
@@ -145,11 +161,34 @@ export class LocationsComponent implements OnInit {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
           }
+          if (error.status === 500) {
+            this.showChildModal();
+          }
         }
       );
   }
 
   cancelButton() {
     this.locationsForm.reset();
+  }
+
+  @ViewChild('childModal') public childModal: ModalDirective;
+
+  public showChildModal(): void {
+    this.childModal.show();
+  }
+
+  public hideChildModal(): void {
+    this.childModal.hide();
+  }
+
+  @ViewChild('successfulModal') public successfulModal: ModalDirective;
+
+  public showSuccessfulModal(): void {
+    this.successfulModal.show();
+  }
+
+  public hideSuccessfulModal(): void {
+    this.successfulModal.hide();
   }
 }

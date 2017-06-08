@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {UserServiceService} from '../user-service.service';
 import {Router} from '@angular/router';
+import {ModalDirective} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-profile',
@@ -55,6 +56,9 @@ export class ProfileComponent implements OnInit {
               if (error.status === 401) {
                 this.router.navigateByUrl('login');
               }
+              if (error.status === 500) {
+                this.showErrorModal();
+              }
             }
           );
         });
@@ -75,6 +79,7 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(this.id, this.body)
       .subscribe(
         response => {
+          this.showSuccessfulModal();
           console.log(response.status);
           this.router.navigateByUrl('admin/dashboard');
         },
@@ -82,12 +87,35 @@ export class ProfileComponent implements OnInit {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
           }
+          if (error.status === 500) {
+            this.showErrorModal();
+          }
         }
       );
   }
 
   cancelButton() {
     this.router.navigateByUrl('admin');
+  }
+
+  @ViewChild('errorModal') public errorModal: ModalDirective;
+
+  public showErrorModal(): void {
+    this.errorModal.show();
+  }
+
+  public hideErrorModal(): void {
+    this.errorModal.hide();
+  }
+
+  @ViewChild('successfulModal') public successfulModal: ModalDirective;
+
+  public showSuccessfulModal(): void {
+    this.successfulModal.show();
+  }
+
+  public hideSuccessfulModal(): void {
+    this.successfulModal.hide();
   }
 
 }

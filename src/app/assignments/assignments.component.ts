@@ -28,6 +28,8 @@ export class AssignmentsComponent implements OnInit {
   private done: boolean;
   private statusDone: boolean;
   auth_token: string;
+  selected_location: string;
+  selected_installer: string;
 
   public assignmentsForm = this.formBuilder.group({
     name: ['', Validators.required],
@@ -66,6 +68,7 @@ export class AssignmentsComponent implements OnInit {
     this.getAssignments();
     this.getLocations();
     this.getUserByToken();
+    this.getInstallers();
   }
 
   getAssignments() {
@@ -76,14 +79,14 @@ export class AssignmentsComponent implements OnInit {
             console.log(response);
             this.rows = response.assignments;
             console.log(this.rows[0].status);
-            // if (response.assignments.status === 'Done') {
-            //   this.statusDone = true;
-            // }
           }
         },
         error => {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
+          }
+          if (error.status === 500) {
+            this.showErrorModal();
           }
         }
       );
@@ -109,6 +112,31 @@ export class AssignmentsComponent implements OnInit {
             console.log('inside if');
             this.router.navigateByUrl('login');
           }
+          if (error.status === 500) {
+            this.showErrorModal();
+          }
+        }
+      );
+  }
+
+  getInstallers() {
+    this.userService.getInstallers()
+
+      .subscribe(
+        response => {
+          if (response) {
+            console.log(response);
+            this.installers = response.data;
+          }
+        },
+        error => {
+          if (error.status === 401) {
+            console.log('inside if');
+            this.router.navigateByUrl('login');
+          }
+          if (error.status === 500) {
+            this.showErrorModal();
+          }
         }
       );
   }
@@ -126,6 +154,9 @@ export class AssignmentsComponent implements OnInit {
           if (error.status === 401) {
             console.log('inside if');
             this.router.navigateByUrl('login');
+          }
+          if (error.status === 500) {
+            this.showErrorModal();
           }
         }
       );
@@ -146,6 +177,7 @@ export class AssignmentsComponent implements OnInit {
     this.assignmentService.saveAssignment(this.body)
       .subscribe(
         response => {
+          this.showSuccessfulModal();
           console.log(response.status);
           this.assignmentsForm.reset();
           this.getAssignments();
@@ -154,6 +186,9 @@ export class AssignmentsComponent implements OnInit {
           if (error.status === 401) {
             console.log('inside if');
             this.router.navigateByUrl('login');
+          }
+          if (error.status === 500) {
+            this.showErrorModal();
           }
         }
       );
@@ -185,8 +220,14 @@ export class AssignmentsComponent implements OnInit {
                 this.nullDetails(),
               ])
             });
-          });
-      }
+          },
+          error => {
+            if (error.status === 500) {
+              this.showErrorModal();
+            }
+          }
+        );
+    }
     this.body = {
       status: this.changeStatus.value.status
     };
@@ -195,6 +236,7 @@ export class AssignmentsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response.status);
+          this.showSuccessfulModal();
           this.assignmentsForm.reset();
           this.getAssignments();
         },
@@ -202,6 +244,9 @@ export class AssignmentsComponent implements OnInit {
           if (error.status === 401) {
             console.log('inside if');
             this.router.navigateByUrl('login');
+          }
+          if (error.status === 500) {
+            this.showErrorModal();
           }
         }
       );
@@ -223,23 +268,31 @@ export class AssignmentsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response.assignment);
+          console.log('location' + response.assignment[0].location);
           this.assignmentsForm = this.formBuilder.group({
-              name: response.assignment[0].name,
-              date: response.assignment[0].date,
-              time: response.assignment[0].time,
-              clientName: response.assignment[0].clientName,
-              clientEmail: response.assignment[0].clientEmail,
-              location: response.assignment[0].location,
-              address: response.assignment[0].address,
-            },
-            error => {
-              if (error.status === 401) {
-                console.log('inside if');
-                this.router.navigateByUrl('login');
-              }
-            }
-          );
-        });
+            name: response.assignment[0].name,
+            date: response.assignment[0].date,
+            time: response.assignment[0].time,
+            clientName: response.assignment[0].clientName,
+            clientEmail: response.assignment[0].clientEmail,
+            location: response.assignment[0].location,
+            address: response.assignment[0].address,
+          });
+          // this.getUsers();
+          console.log('installers:' + this.installers);
+          this.selected_location = response.assignment[0].location;
+          this.selected_installer = response.assignment[0].name;
+        },
+        error => {
+          if (error.status === 401) {
+            console.log('inside if');
+            this.router.navigateByUrl('login');
+          }
+          if (error.status === 500) {
+            this.showErrorModal();
+          }
+        }
+      );
   }
 
   updateAssignment() {
@@ -254,9 +307,12 @@ export class AssignmentsComponent implements OnInit {
       address: this.assignmentsForm.value.address,
     };
 
+    console.log(this.assignmentsForm.controls.name.value);
+
     this.assignmentService.updateAssignment(this.selected[0].id, this.body)
       .subscribe(
         response => {
+          this.showSuccessfulModal();
           console.log(response.status);
           this.assignmentsForm.reset();
           this.getAssignments();
@@ -265,6 +321,9 @@ export class AssignmentsComponent implements OnInit {
           if (error.status === 401) {
             console.log('inside if');
             this.router.navigateByUrl('login');
+          }
+          if (error.status === 500) {
+            this.showErrorModal();
           }
         }
       );
@@ -305,6 +364,7 @@ export class AssignmentsComponent implements OnInit {
     this.billService.saveBill(this.body)
       .subscribe(
         response => {
+          this.showSuccessfulModal();
           console.log(response);
           this.router.navigateByUrl('admin/bills');
         },
@@ -312,6 +372,9 @@ export class AssignmentsComponent implements OnInit {
           if (error.status === 401) {
             console.log('inside if');
             this.router.navigateByUrl('login');
+          }
+          if (error.status === 500) {
+            this.showErrorModal();
           }
         }
       );
@@ -337,6 +400,9 @@ export class AssignmentsComponent implements OnInit {
           if (error.status === 401) {
             this.router.navigateByUrl('login');
           }
+          if (error.status === 500) {
+            this.showErrorModal();
+          }
         }
       );
   }
@@ -344,6 +410,26 @@ export class AssignmentsComponent implements OnInit {
   cancelButton() {
     this.assignmentsForm.reset();
     this.billForm.reset();
+  }
+
+  @ViewChild('errorModal') public errorModal: ModalDirective;
+
+  public showErrorModal(): void {
+    this.errorModal.show();
+  }
+
+  public hideErrorModal(): void {
+    this.errorModal.hide();
+  }
+
+  @ViewChild('successfulModal') public successfulModal: ModalDirective;
+
+  public showSuccessfulModal(): void {
+    this.successfulModal.show();
+  }
+
+  public hideSuccessfulModal(): void {
+    this.successfulModal.hide();
   }
 }
 

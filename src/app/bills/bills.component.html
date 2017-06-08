@@ -57,7 +57,7 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="PDF" [flexGrow]="1">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <a href="{{value}}"><i class="fa fa-file-pdf-o"></i></a>
+                  <a href="{{value}}" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
                 </ng-template>
               </ngx-datatable-column>
               <ngx-datatable-column name="Action" [flexGrow]="2">
@@ -106,6 +106,38 @@
       </div>
     </div>
 
+    <div bsModal #errorModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left"><i style="color:red; font-size: 20px" class="fa fa-exclamation-triangle"></i>Oops! Something went wrong.</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="hideErrorModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Something went wrong! Please try again.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div bsModal #successfulModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left"><i style="color:green; font-size: 20px" class="fa fa-exclamation-triangle"></i> Great!</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="hideSuccessfulModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>The action was successful.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!--<div class="row">-->
       <!--<div class="col-md-12">-->
         <!--<a id="new" data-toggle="collapse" data-target="#registry"><i class="fa fa-plus-circle"></i> New Bill</a>-->
@@ -114,7 +146,7 @@
     <div class="row collapse" id="registry">
       <section class="content-header">
         <h1>
-          New Bill
+          Update Bill
         </h1>
       </section>
       <br><br>
@@ -179,7 +211,7 @@
           <div class="form-group last">
             <div class="col-md-12" style="text-align: center;">
               <button (click)="updateBill()" type="submit" class="btn btn-success btn-md">
-                Edit</button>
+                Update</button>
               <button data-toggle="collapse" data-target="#registry" type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>
             </div>

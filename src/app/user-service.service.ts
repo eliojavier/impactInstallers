@@ -24,6 +24,12 @@ export class UserServiceService {
       .catch(this.errorHandler);
   }
 
+  getInstallers() {
+    return this.http.get(this.baseURI + 'users/installers', {headers: this.headers})
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
   getAvailableUsers(body) {
     return this.http.get(this.baseURI + 'users/available/' + body.date + '/' + body.time, {headers: this.headers})
       .map((response: Response) => response.json())
