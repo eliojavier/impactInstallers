@@ -10,7 +10,7 @@ export class AssignmentServiceService {
 
   public baseURI = 'http://localhost:8000/api/';
   auth_token: string;
-  headers : Headers = new Headers();
+  headers: Headers = new Headers();
 
   constructor(public http: Http) {
     this.auth_token = (localStorage.getItem('auth_token'));

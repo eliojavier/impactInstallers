@@ -81,7 +81,6 @@ export class ProfileComponent implements OnInit {
         response => {
           this.showSuccessfulModal();
           console.log(response.status);
-          this.router.navigateByUrl('admin/dashboard');
         },
         error => {
           if (error.status === 401) {
@@ -116,6 +115,8 @@ export class ProfileComponent implements OnInit {
 
   public hideSuccessfulModal(): void {
     this.successfulModal.hide();
+    location.reload();
+     this.router.navigate(['admin/dashboard']);
   }
 
 }

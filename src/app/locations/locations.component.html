@@ -100,9 +100,14 @@
       </div>
     </div>
     <div class="row collapse" id="registry">
-      <section class="content-header">
+      <section class="content-header" *ngIf="save">
         <h1>
           New Location
+        </h1>
+      </section>
+      <section class="content-header" *ngIf="!save">
+        <h1>
+          Update Location
         </h1>
       </section>
       <br><br>
@@ -178,18 +183,18 @@
           <!--</div>-->
           <div class="form-group last" *ngIf="save">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" (click)="submitForm()" class="btn btn-success btn-md">
+              <button data-toggle="collapse" data-target="#registry" (click)="submitForm()" class="btn btn-success btn-md">
                 Save</button>
-              <button type="submit" class="btn btn-cancel btn-md">
+              <button (click)="cancelButton()"  data-toggle="collapse" data-target="#registry" class="btn btn-cancel btn-md">
                 Cancel</button>
             </div>
           </div>
 
           <div class="form-group last" *ngIf="!save">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="updateLocation()" class="btn btn-success btn-md">
-                Edit</button>
-              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" type="submit" class="btn btn-cancel btn-md">
+              <button (click)="updateLocation()" data-toggle="collapse" data-target="#registry"  class="btn btn-success btn-md">
+                Update</button>
+              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" class="btn btn-cancel btn-md">
                 Cancel</button>
             </div>
           </div>
@@ -199,9 +204,3 @@
   </section>
   <!-- /.content -->
 </div>
-
-<script>
-  $(function () {
-    $("#example1").DataTable();
-  });
-</script>

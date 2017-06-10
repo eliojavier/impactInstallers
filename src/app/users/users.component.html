@@ -129,9 +129,14 @@
       </div>
     </div>
     <div class="row collapse" id="registry">
-      <section class="content-header">
+      <section class="content-header" *ngIf="save">
         <h1>
           New User
+        </h1>
+      </section>
+      <section class="content-header" *ngIf="!save">
+        <h1>
+          Update User
         </h1>
       </section>
       <br><br>
@@ -203,18 +208,18 @@
           </div>
           <div class="form-group last" *ngIf="save">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="submitForm()" class="btn btn-success btn-md">
+              <button (click)="submitForm()" data-toggle="collapse" data-target="#registry"  class="btn btn-success btn-md">
                 Save</button>
-              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" type="submit" class="btn btn-cancel btn-md">
+              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" class="btn btn-cancel btn-md">
                 Cancel</button>
             </div>
           </div>
 
           <div class="form-group last" *ngIf="!save">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="updateUser()" class="btn btn-success btn-md">
-                Edit</button>
-              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" type="submit" class="btn btn-cancel btn-md">
+              <button (click)="updateUser()" data-toggle="collapse" data-target="#registry"  class="btn btn-success btn-md">
+                Update</button>
+              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" class="btn btn-cancel btn-md">
                 Cancel</button>
             </div>
           </div>

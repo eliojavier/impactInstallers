@@ -25,8 +25,9 @@ export class AssignmentsComponent implements OnInit {
   private save: boolean;
   private supervisor: boolean;
   private role: any;
+  private i: any;
   private done: boolean;
-  private statusDone: boolean;
+  today: any;
   auth_token: string;
   selected_location: string;
   selected_installer: string;
@@ -69,6 +70,7 @@ export class AssignmentsComponent implements OnInit {
     this.getLocations();
     this.getUserByToken();
     this.getInstallers();
+    this.today = Date.now();
   }
 
   getAssignments() {
@@ -76,9 +78,10 @@ export class AssignmentsComponent implements OnInit {
       .subscribe(
         response => {
           if (response) {
+            this.i = 0;
             console.log(response);
             this.rows = response.assignments;
-            console.log(this.rows[0].status);
+            // console.log(this.rows[0].status);
           }
         },
         error => {

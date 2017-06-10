@@ -64,23 +64,23 @@
               <ngx-datatable-column name="Status" [flexGrow]="2">
                 <ng-template let-value="value" ngx-datatable-cell-template>
                   {{value}}
+                  <ng-template *ngIf="value === 'Done'; then ifBlock else elseBlock">
+                  </ng-template>
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="Action" [flexGrow]="1">
-                <ng-template let-value="value" ngx-datatable-cell-template>
-                  <!--<div class="buttonsDisabled" *ngIf="row.status.value === 'Done'">-->
-                    <!--<a data-toggle="collapse" data-target="#registry" (dblclick)="getAssignment(); buttonFalse()"><i class="fa fa-edit"></i></a>-->
-                    <!--<a (dblclick)="showChildModal()"><i class="fa fa-clock-o"></i></a>-->
-                  <!--</div>-->
-                  <!--<div *ngIf="row.status.value !== 'Done'">-->
-                    <!--<a data-toggle="collapse" data-target="#registry" (dblclick)="getAssignment(); buttonFalse()"><i class="fa fa-edit"></i></a>-->
-                    <!--<a (dblclick)="showChildModal()"><i class="fa fa-clock-o"></i></a>-->
-                  <!--</div>-->
-
-                  <a data-toggle="collapse" data-target="#registry" (dblclick)="getAssignment(); buttonFalse()"><i class="fa fa-edit"></i></a>
+              <ng-template let-value="value" ngx-datatable-cell-template #ifBlock>
+                <div class="buttonsDisabled">
+                  <a><i class="fa fa-edit"></i></a>
+                  <a><i class="fa fa-clock-o"></i></a>
+                </div>
+              </ng-template>
+              <ng-template let-value="value" ngx-datatable-cell-template #elseBlock>
+                <div>
+                  <a data-toggle="collapse" data-target="#registry" (dblclick)="getAssignment(); buttonFalse()"><i
+                    class="fa fa-edit"></i></a>
                   <a (dblclick)="showChildModal()"><i class="fa fa-clock-o"></i></a>
-                </ng-template>
-              </ngx-datatable-column>
+                </div>
+              </ng-template>
             </ngx-datatable>
           </div>
           <!-- /.box-body -->
@@ -120,11 +120,13 @@
       </div>
     </div>
 
-    <div bsModal #errorModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div bsModal #errorModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title pull-left"><i style="color:red; font-size: 20px" class="fa fa-exclamation-triangle"></i>Oops! Something went wrong.</h4>
+            <h4 class="modal-title pull-left"><i style="color:red; font-size: 20px"
+                                                 class="fa fa-exclamation-triangle"></i>Oops! Something went wrong.</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="hideErrorModal()">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -136,11 +138,13 @@
       </div>
     </div>
 
-    <div bsModal #successfulModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div bsModal #successfulModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title pull-left"><i style="color:green; font-size: 20px" class="fa fa-exclamation-triangle"></i> Great!</h4>
+            <h4 class="modal-title pull-left"><i style="color:green; font-size: 20px"
+                                                 class="fa fa-exclamation-triangle"></i> Great!</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="hideSuccessfulModal()">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -158,9 +162,14 @@
       </div>
     </div>
     <div class="row collapse" id="registry">
-      <section class="content-header">
+      <section class="content-header" *ngIf="save">
         <h1>
           New Assignment
+        </h1>
+      </section>
+      <section class="content-header" *ngIf="!save">
+        <h1>
+          Update Assignment
         </h1>
       </section>
       <br><br>
@@ -170,7 +179,7 @@
             <label class="col-md-2 col-md-offset-2 control-label">
               Date</label>
             <div class="col-md-4">
-              <input type="date" class="form-control" formControlName="date" required>
+              <input type="date" class="form-control" formControlName="date" required min="{{today|date:'yyyy-MM-dd'}}">
               <small *ngIf="!assignmentsForm.controls.date.valid" class="text-danger">
                 Date is required.
               </small>
@@ -212,7 +221,9 @@
             <div class="col-md-4">
               <select type="text" class="form-control" formControlName="location" required>
                 <!--<option *ngFor="let x of locations" [value]="x.id" [selected]="x.id">{{x.name}}</option>-->
-                <option *ngFor="let x of locations" [value]="x.id" [selected]="x.name == selected_location ? true: null">{{x.name}}</option>
+                <option *ngFor="let x of locations" [value]="x.id"
+                        [selected]="x.name == selected_location ? true: null">{{x.name}}
+                </option>
               </select>
               <small *ngIf="!assignmentsForm.controls.location.valid" class="text-danger">
                 Location is required.
@@ -234,7 +245,9 @@
               Installer</label>
             <div class="col-md-4">
               <select (focus)="getUsers()" class="form-control" formControlName="name" required>
-                <option *ngFor="let x of installers" [value]="x.id" [selected]="x.name == selected_installer ? true: null">{{x.name}}</option>
+                <option *ngFor="let x of installers" [value]="x.id"
+                        [selected]="x.name == selected_installer ? true: null">{{x.name}}
+                </option>
               </select>
               <small *ngIf="!assignmentsForm.controls.name.valid" class="text-danger">
                 Installer is required.
@@ -243,20 +256,22 @@
           </div>
           <div class="form-group last" *ngIf="save">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="submitForm();" type="submit" class="btn btn-success btn-md">
+              <button (click)="submitForm();" data-toggle="collapse" data-target="#registry" type="submit" class="btn btn-success btn-md">
                 Save
               </button>
-              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" type="submit" class="btn btn-cancel btn-md">
+              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" type="submit"
+                      class="btn btn-cancel btn-md">
                 Cancel
               </button>
             </div>
           </div>
           <div class="form-group last" *ngIf="!save">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="updateAssignment()" class="btn btn-success btn-md">
-                Edit
+              <button (click)="updateAssignment()" data-toggle="collapse" data-target="#registry" class="btn btn-success btn-md">
+                Update
               </button>
-              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" type="submit" class="btn btn-cancel btn-md">
+              <button (click)="cancelButton()" data-toggle="collapse" data-target="#registry" type="submit"
+                      class="btn btn-cancel btn-md">
                 Cancel
               </button>
             </div>
@@ -278,26 +293,26 @@
             <label>Bill Number</label>
             <input type="number" class="form-control" formControlName="bill_number">
             <!--<small *ngIf="!billForm.controls.bill_number.valid" class="text-danger">-->
-              <!--Number is required.-->
+            <!--Number is required.-->
             <!--</small>-->
           </div>
           <div class="form-group">
             <label>Date</label>
-            <input type="date" class="form-control" formControlName="date">
+            <input disabled type="date" class="form-control" formControlName="date">
             <small *ngIf="!billForm.controls.date.valid" class="text-danger">
               Date is required.
             </small>
           </div>
           <div class="form-group">
             <label>Client Name</label>
-            <input type="text" class="form-control" formControlName="clientName">
+            <input disabled type="text" class="form-control" formControlName="clientName">
             <small *ngIf="!billForm.controls.clientName.valid" class="text-danger">
               Name is required.
             </small>
           </div>
           <div class="form-group">
             <label>Client Email</label>
-            <input type="text" class="form-control" formControlName="clientEmail">
+            <input disabled type="text" class="form-control" formControlName="clientEmail">
             <small *ngIf="!billForm.controls.clientEmail.valid" class="text-danger">
               Email is required.
             </small>
@@ -333,10 +348,11 @@
           </div>
           <div class="form-group last">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="saveBill()" type="submit" class="btn btn-success btn-md">
+              <button (click)="saveBill()" data-toggle="collapse" data-target="#bills" type="submit" class="btn btn-success btn-md">
                 Save
               </button>
-              <button (click)="cancelButton()" data-toggle="collapse" data-target="#bills" type="submit" class="btn btn-cancel btn-md">
+              <button (click)="cancelButton()" data-toggle="collapse" data-target="#bills" type="submit"
+                      class="btn btn-cancel btn-md">
                 Cancel
               </button>
             </div>

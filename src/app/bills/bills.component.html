@@ -161,21 +161,21 @@
           </div>
           <div class="form-group">
             <label>Date</label>
-            <input type="date" class="form-control" formControlName="date">
+            <input disabled type="date" class="form-control" formControlName="date">
             <small *ngIf="!billForm.controls.date.valid" class="text-danger">
               Date is required.
             </small>
           </div>
           <div class="form-group">
             <label>Client Name</label>
-            <input type="text" class="form-control" formControlName="clientName">
+            <input disabled type="text" class="form-control" formControlName="clientName">
             <small *ngIf="!billForm.controls.clientName.valid" class="text-danger">
               Name is required.
             </small>
           </div>
           <div class="form-group">
             <label>Client Email</label>
-            <input type="text" class="form-control" formControlName="clientEmail">
+            <input disabled type="text" class="form-control" formControlName="clientEmail">
             <small *ngIf="!billForm.controls.clientEmail.valid" class="text-danger">
               Email is required.
             </small>
@@ -210,7 +210,7 @@
           </div>
           <div class="form-group last">
             <div class="col-md-12" style="text-align: center;">
-              <button (click)="updateBill()" type="submit" class="btn btn-success btn-md">
+              <button (click)="updateBill()" data-toggle="collapse" data-target="#registry" type="submit" class="btn btn-success btn-md">
                 Update</button>
               <button data-toggle="collapse" data-target="#registry" type="submit" class="btn btn-cancel btn-md">
                 Cancel</button>
