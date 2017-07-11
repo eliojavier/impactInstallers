@@ -15,8 +15,8 @@ export class LocationsComponent implements OnInit {
   public errorMsg: string;
   selected: any[] = [];
   rows = [];
-  private body: any;
-  private save: boolean;
+  public body: any;
+  public save: boolean;
 
   public locationsForm = this.formBuilder.group({
     name: ['', Validators.required],
@@ -28,7 +28,7 @@ export class LocationsComponent implements OnInit {
   });
 
   constructor(public formBuilder: FormBuilder,
-              private locationService: LocationServiceService,
+              public locationService: LocationServiceService,
               public router: Router) {
   }
 

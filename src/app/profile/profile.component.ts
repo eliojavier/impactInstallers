@@ -12,8 +12,8 @@ import {ModalDirective} from 'ngx-bootstrap';
 })
 export class ProfileComponent implements OnInit {
 
-  private body: any;
-  private id: any;
+  public body: any;
+  public id: any;
   public errorMsg: string;
 
   public registerForm = this.formBuilder.group({
@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
   });
 
   constructor(public formBuilder: FormBuilder,
-              private userService: UserServiceService,
+              public userService: UserServiceService,
               public router: Router) {
   }
 

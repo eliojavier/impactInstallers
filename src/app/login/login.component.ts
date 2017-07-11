@@ -12,9 +12,9 @@ import {ModalDirective} from 'ngx-bootstrap';
   providers: [LoginServiceService]
 })
 export class LoginComponent implements OnInit {
-  private loginForm: FormGroup;
-  private body: any;
-  private errorMsg: string;
+  public loginForm: FormGroup;
+  public body: any;
+  public errorMsg: string;
 
   constructor(public formBuilder: FormBuilder,
               public loginService: LoginServiceService,

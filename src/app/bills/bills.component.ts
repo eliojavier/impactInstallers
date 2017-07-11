@@ -16,16 +16,16 @@ export class BillsComponent implements OnInit {
   public billForm: FormGroup;
   public form: FormGroup;
   public detailsForm: FormArray;
-  private body: any;
-  private details: any;
-  private i: any;
+  public body: any;
+  public details: any;
+  public i: any;
   selected: any[] = [];
   rows = [];
   auth_token: string;
 
-  constructor(private formBuilder: FormBuilder,
-              private billService: BillServiceService,
-              private router: Router) {
+  constructor(public formBuilder: FormBuilder,
+              public billService: BillServiceService,
+              public router: Router) {
 
     this.auth_token = (localStorage.getItem('auth_token'));
   }

@@ -15,8 +15,8 @@ export class UsersComponent implements OnInit {
   public errorMsg: string;
   selected: any[] = [];
   rows = [];
-  private body: any;
-  private save: boolean;
+  public body: any;
+  public save: boolean;
 
   public registerForm = this.formBuilder.group({
     first_name: ['', Validators.required],
@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit {
   });
 
   constructor(public formBuilder: FormBuilder,
-              private userService: UserServiceService,
+              public userService: UserServiceService,
               public router: Router) {
   }
 

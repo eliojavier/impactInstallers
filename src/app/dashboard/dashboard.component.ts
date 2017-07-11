@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   doors: any[] = [];
   windows: any[] = [];
   report: any;
-  private body: any;
+  public body: any;
 
   public commissionData = this.formBuilder.group({
     month: ['', Validators.required],

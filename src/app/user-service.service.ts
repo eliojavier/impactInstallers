@@ -8,7 +8,7 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class UserServiceService {
   public baseURI = 'http://localhost:8000/api/';
-  private body: any;
+  public body: any;
   auth_token: string;
   headers: Headers = new Headers();
 

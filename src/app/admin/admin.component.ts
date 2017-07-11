@@ -10,13 +10,13 @@ import {Router} from '@angular/router';
 })
 export class AdminComponent implements OnInit {
 
-  private userName: any;
-  private role: any;
-  private supervisor: boolean;
+  userName: any;
+  role: any;
+  supervisor: boolean;
 
   auth_token: string;
 
-  constructor(private userService: UserServiceService, private router: Router) {
+  constructor(public userService: UserServiceService, public router: Router) {
     this.auth_token = (localStorage.getItem('auth_token'));
   }
 

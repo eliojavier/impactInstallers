@@ -19,14 +19,14 @@ export class AssignmentsComponent implements OnInit {
   public errorMsg: string;
   selected: any[] = [];
   rows = [];
-  private body: any;
-  private installers: any;
-  private locations: any;
-  private save: boolean;
-  private supervisor: boolean;
-  private role: any;
-  private i: any;
-  private done: boolean;
+  public body: any;
+  public installers: any;
+  public locations: any;
+  public save: boolean;
+  public supervisor: boolean;
+  public role: any;
+  public i: any;
+  public done: boolean;
   today: any;
   auth_token: string;
   selected_location: string;
@@ -57,11 +57,11 @@ export class AssignmentsComponent implements OnInit {
   });
 
   constructor(public formBuilder: FormBuilder,
-              private router: Router,
-              private assignmentService: AssignmentServiceService,
-              private userService: UserServiceService,
-              private  locationService: LocationServiceService,
-              private billService: BillServiceService) {
+              public router: Router,
+              public assignmentService: AssignmentServiceService,
+              public userService: UserServiceService,
+              public  locationService: LocationServiceService,
+              public billService: BillServiceService) {
 
   }
 

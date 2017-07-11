@@ -182,12 +182,13 @@
           </div>
           <!--details-->
           <div formArrayName="details">
-            <div *ngFor="let address of billForm.controls.details.controls; let i=index" class="panel panel-default">
+            <!--<div *ngFor="let address of billForm.controls.details.controls; let i=index" class="panel panel-default">-->
+            <div>
               <div class="panel-heading">
                 <span>Detail {{i + 1}}</span>
-                <span class="glyphicon glyphicon-remove pull-right"
-                      *ngIf="billForm.controls.details.controls.length > 1"
-                      (click)="removeDetail(i)"></span>
+                <!--<span class="glyphicon glyphicon-remove pull-right"-->
+                      <!--*ngIf="billForm.controls.details.controls.length > 1"-->
+                      <!--(click)="removeDetail(i)"></span>-->
               </div>
               <div class="panel-body" [formGroupName]="i">
                 <div class="form-group col-md-4">
