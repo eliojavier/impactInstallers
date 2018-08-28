@@ -22,6 +22,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.getUserByToken();
+    this.supervisor = true;
   }
 
   getUserByToken() {
