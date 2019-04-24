@@ -76,9 +76,9 @@
               </ng-template>
               <ng-template let-value="value" ngx-datatable-cell-template #elseBlock>
                 <div>
-                  <a data-toggle="collapse" data-target="#registry" (dblclick)="getAssignment(); buttonFalse()"><i
+                  <a data-toggle="collapse" data-target="#registry" (click)="getAssignment(); buttonFalse()"><i
                     class="fa fa-edit"></i></a>
-                  <a (dblclick)="showChildModal()"><i class="fa fa-clock-o"></i></a>
+                  <a (click)="showChildModal()"><i class="fa fa-clock-o"></i></a>
                 </div>
               </ng-template>
             </ngx-datatable>

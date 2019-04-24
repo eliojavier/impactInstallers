@@ -25,6 +25,7 @@ export class AssignmentServiceService {
   }
 
   saveAssignment(body) {
+    console.log(this.headers);
     return this.http.post(this.baseURI + 'assignments', body, {headers: this.headers})
       .map((response: Response) => response.json())
       .catch(this.errorHandler);

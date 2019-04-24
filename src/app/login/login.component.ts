@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.body = {
       client_id: 2,
-      client_secret: 'CaRMdaevQk04H8nkw88cQ3RsjSKUSxaLVwfDUQOt',
+      client_secret: 'zCsLWFx3zFvpUW5DpUgq8gLRNR7VmD4rEJ0Gfo8P',
       grant_type: 'password',
       username: this.loginForm.value.email,
       password: this.loginForm.value.password,

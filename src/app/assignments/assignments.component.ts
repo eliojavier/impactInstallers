@@ -85,9 +85,9 @@ export class AssignmentsComponent implements OnInit {
           }
         },
         error => {
-          if (error.status === 401) {
-            this.router.navigateByUrl('login');
-          }
+          // if (error.status === 401) {
+          //   this.router.navigateByUrl('login');
+          // }
           if (error.status === 500) {
             this.showErrorModal();
           }
@@ -111,10 +111,10 @@ export class AssignmentsComponent implements OnInit {
           }
         },
         error => {
-          if (error.status === 401) {
-            console.log('inside if');
-            this.router.navigateByUrl('login');
-          }
+          // if (error.status === 401) {
+          //   console.log('inside if');
+          //   this.router.navigateByUrl('login');
+          // }
           if (error.status === 500) {
             this.showErrorModal();
           }
@@ -133,10 +133,10 @@ export class AssignmentsComponent implements OnInit {
           }
         },
         error => {
-          if (error.status === 401) {
-            console.log('inside if');
-            this.router.navigateByUrl('login');
-          }
+          // if (error.status === 401) {
+          //   console.log('inside if');
+          //   this.router.navigateByUrl('login');
+          // }
           if (error.status === 500) {
             this.showErrorModal();
           }
@@ -154,10 +154,10 @@ export class AssignmentsComponent implements OnInit {
           }
         },
         error => {
-          if (error.status === 401) {
-            console.log('inside if');
-            this.router.navigateByUrl('login');
-          }
+          // if (error.status === 401) {
+          //   console.log('inside if');
+          //   this.router.navigateByUrl('login');
+          // }
           if (error.status === 500) {
             this.showErrorModal();
           }
@@ -186,10 +186,10 @@ export class AssignmentsComponent implements OnInit {
           this.getAssignments();
         },
         error => {
-          if (error.status === 401) {
-            console.log('inside if');
-            this.router.navigateByUrl('login');
-          }
+          // if (error.status === 401) {
+          //   console.log('inside if');
+          //   this.router.navigateByUrl('login');
+          // }
           if (error.status === 500) {
             this.showErrorModal();
           }
@@ -244,10 +244,10 @@ export class AssignmentsComponent implements OnInit {
           this.getAssignments();
         },
         error => {
-          if (error.status === 401) {
-            console.log('inside if');
-            this.router.navigateByUrl('login');
-          }
+          // if (error.status === 401) {
+          //   console.log('inside if');
+          //   this.router.navigateByUrl('login');
+          // }
           if (error.status === 500) {
             this.showErrorModal();
           }
@@ -287,10 +287,10 @@ export class AssignmentsComponent implements OnInit {
           this.selected_installer = response.assignment[0].name;
         },
         error => {
-          if (error.status === 401) {
-            console.log('inside if');
-            this.router.navigateByUrl('login');
-          }
+          // if (error.status === 401) {
+          //   console.log('inside if');
+          //   this.router.navigateByUrl('login');
+          // }
           if (error.status === 500) {
             this.showErrorModal();
           }
@@ -321,10 +321,10 @@ export class AssignmentsComponent implements OnInit {
           this.getAssignments();
         },
         error => {
-          if (error.status === 401) {
-            console.log('inside if');
-            this.router.navigateByUrl('login');
-          }
+          // if (error.status === 401) {
+          //   console.log('inside if');
+          //   this.router.navigateByUrl('login');
+          // }
           if (error.status === 500) {
             this.showErrorModal();
           }
@@ -372,10 +372,10 @@ export class AssignmentsComponent implements OnInit {
           this.router.navigateByUrl('admin/bills');
         },
         error => {
-          if (error.status === 401) {
-            console.log('inside if');
-            this.router.navigateByUrl('login');
-          }
+          // if (error.status === 401) {
+          //   console.log('inside if');
+          //   this.router.navigateByUrl('login');
+          // }
           if (error.status === 500) {
             this.showErrorModal();
           }
@@ -400,9 +400,9 @@ export class AssignmentsComponent implements OnInit {
           console.log('roleee ' + this.supervisor);
         },
         error => {
-          if (error.status === 401) {
-            this.router.navigateByUrl('login');
-          }
+          // if (error.status === 401) {
+          //   this.router.navigateByUrl('login');
+          // }
           if (error.status === 500) {
             this.showErrorModal();
           }
